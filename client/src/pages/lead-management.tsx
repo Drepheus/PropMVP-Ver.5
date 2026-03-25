@@ -10,6 +10,7 @@ import NavigationBar from "@/components/navigation-bar";
 import Sidebar from "@/components/sidebar";
 import WorkflowProgress from "@/components/workflow-progress";
 import CollapsibleSection from "@/components/collapsible-section";
+import { useLocation } from "wouter";
 import { 
   Users, 
   Phone, 
@@ -162,6 +163,8 @@ const leadManagementData = {
 
 export default function LeadManagement() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [location, setLocation] = useLocation();
+  const [activeTab, setActiveTab] = useState("pipeline");
   const [workflowVisible, setWorkflowVisible] = useState(false);
 
   const { data: leads = [], isLoading } = useQuery<PropertyWithDetails[]>({
@@ -285,7 +288,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Total Leads</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{formatNumber(leadManagementData.overview.totalLeads)}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{formatNumber(leadManagementData.overview.totalLeads)}</p>
                 </div>
                 <div className="p-3 bg-blue-500/20 rounded-xl">
                   <Users className="h-6 w-6 text-blue-400" />
@@ -302,7 +305,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Qualified</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{formatNumber(leadManagementData.overview.qualifiedLeads)}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{formatNumber(leadManagementData.overview.qualifiedLeads)}</p>
                 </div>
                 <div className="p-3 bg-emerald-500/20 rounded-xl">
                   <CheckCircle className="h-6 w-6 text-emerald-400" />
@@ -319,7 +322,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Active Deals</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{leadManagementData.overview.activeDeals}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{leadManagementData.overview.activeDeals}</p>
                 </div>
                 <div className="p-3 bg-purple-500/20 rounded-xl">
                   <Target className="h-6 w-6 text-purple-400" />
@@ -336,7 +339,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Closed Deals</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{leadManagementData.overview.closedDeals}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{leadManagementData.overview.closedDeals}</p>
                 </div>
                 <div className="p-3 bg-yellow-500/20 rounded-xl">
                   <Star className="h-6 w-6 text-yellow-400" />
@@ -353,7 +356,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Conversion Rate</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{leadManagementData.overview.conversionRate}%</p>
+                  <p className="text-3xl font-bold text-white mt-1">{leadManagementData.overview.conversionRate}%</p>
                 </div>
                 <div className="p-3 bg-orange-500/20 rounded-xl">
                   <TrendingUp className="h-6 w-6 text-orange-400" />
@@ -370,7 +373,7 @@ export default function LeadManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Avg Deal Value</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{formatCurrency(leadManagementData.overview.avgDealValue)}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{formatCurrency(leadManagementData.overview.avgDealValue)}</p>
                 </div>
                 <div className="p-3 bg-red-500/20 rounded-xl">
                   <DollarSign className="h-6 w-6 text-red-400" />
@@ -391,8 +394,8 @@ export default function LeadManagement() {
           icon={Activity}
           defaultExpanded={false}
         >
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-          <CardHeader className="bg-gradient-to-r from-indigo-800/30 to-indigo-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+          <CardHeader className="bg-black border-b border-slate-900 pb-6">
             <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
               Deal Pipeline
               <div className="p-2 bg-indigo-500/20 rounded-xl">
@@ -403,10 +406,10 @@ export default function LeadManagement() {
           <CardContent className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               {leadManagementData.pipeline.map((stage, index) => (
-                <div key={index} className="glass-card rounded-2xl p-6 text-center">
+                <div key={index} className="bg-black border border-slate-900 rounded-[1.5rem] p-6 text-center">
                   <div className={`w-4 h-4 ${stage.color} rounded-full mx-auto mb-3`}></div>
                   <h3 className="text-slate-200 font-semibold mb-2">{stage.stage}</h3>
-                  <div className="text-2xl font-bold text-gradient mb-1">{stage.count}</div>
+                  <div className="text-2xl font-bold text-white mb-1">{stage.count}</div>
                   <div className="text-slate-400 text-sm mb-3">leads</div>
                   <div className="text-slate-300 font-medium">{formatCurrency(stage.value)}</div>
                   <div className="text-slate-500 text-xs">pipeline value</div>
@@ -425,7 +428,7 @@ export default function LeadManagement() {
           defaultExpanded={false}
         >
           <Tabs defaultValue="leads" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 glass-card rounded-2xl">
+          <TabsList className="grid w-full grid-cols-4 bg-black border border-slate-900 rounded-[1.5rem]">
             <TabsTrigger value="leads" className="rounded-xl">Recent Leads</TabsTrigger>
             <TabsTrigger value="sources" className="rounded-xl">Lead Sources</TabsTrigger>
             <TabsTrigger value="activity" className="rounded-xl">Recent Activity</TabsTrigger>
@@ -434,12 +437,12 @@ export default function LeadManagement() {
 
           {/* Recent Leads Tab */}
           <TabsContent value="leads">
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden" data-tour="add-lead">
-              <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden" data-tour="add-lead">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Recent Leads
                   <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" className="glass-card">
+                    <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                       <Search className="h-4 w-4 mr-2" />
                       Search
                     </Button>
@@ -504,7 +507,11 @@ export default function LeadManagement() {
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center justify-center gap-2">
-                              <Button size="sm" variant="ghost" className="text-slate-400 hover:text-slate-200" onClick={() => window.location.href = `/dashboard?property=${property.id}`}>
+                              <Button size="sm" variant="ghost" className="bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500 hover:text-black border border-emerald-500/20 transition-colors" title="Make Offer" onClick={() => setLocation("/make-offer")}>
+                                <DollarSign className="h-4 w-4 mr-1" />
+                                Offer
+                              </Button>
+                              <Button size="sm" variant="ghost" title="View Details" className="bg-slate-900 border border-slate-800 text-slate-400 hover:text-white" onClick={() => setLocation(`/property-search?id=${property.id}`)}>
                                 <Eye className="h-4 w-4" />
                               </Button>
                             </div>
@@ -520,8 +527,8 @@ export default function LeadManagement() {
 
           {/* Lead Sources Tab */}
           <TabsContent value="sources">
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Lead Source Performance
                   <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -532,10 +539,10 @@ export default function LeadManagement() {
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {leadManagementData.leadSources.map((source, index) => (
-                    <div key={index} className="glass-card rounded-2xl p-6">
+                    <div key={index} className="bg-black border border-slate-900 rounded-[1.5rem] p-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="text-slate-200 font-semibold">{source.source}</h3>
-                        <div className="text-2xl font-bold text-gradient">{source.count}</div>
+                        <div className="text-2xl font-bold text-white">{source.count}</div>
                       </div>
                       <div className="space-y-3">
                         <div className="flex justify-between">
@@ -566,8 +573,8 @@ export default function LeadManagement() {
 
           {/* Recent Activity Tab */}
           <TabsContent value="activity">
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Recent Activity
                   <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -578,7 +585,7 @@ export default function LeadManagement() {
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {leadManagementData.activities.map((activity) => (
-                    <div key={activity.id} className="glass-card rounded-2xl p-4 flex items-center gap-4">
+                    <div key={activity.id} className="bg-black border border-slate-900 rounded-[1.5rem] p-4 flex items-center gap-4">
                       <div className="p-2 bg-slate-700/50 rounded-lg text-slate-400">
                         {getActivityIcon(activity.type)}
                       </div>
@@ -599,8 +606,8 @@ export default function LeadManagement() {
 
           {/* Notifications Tab */}
           <TabsContent value="notifications">
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-red-800/30 to-red-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Notifications & Alerts
                   <div className="p-2 bg-red-500/20 rounded-xl">
@@ -611,7 +618,7 @@ export default function LeadManagement() {
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {leadManagementData.notifications.map((notification) => (
-                    <div key={notification.id} className="glass-card rounded-2xl p-6 flex items-center gap-4">
+                    <div key={notification.id} className="bg-black border border-slate-900 rounded-[1.5rem] p-6 flex items-center gap-4">
                       <div className={`p-3 rounded-xl ${
                         notification.type === 'urgent' ? 'bg-red-500/20' :
                         notification.type === 'reminder' ? 'bg-yellow-500/20' :

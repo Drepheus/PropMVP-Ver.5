@@ -87,7 +87,7 @@ export default function MakeOfferPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -98,10 +98,10 @@ export default function MakeOfferPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <div className="p-3 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl mr-3">
+            <div className="p-3 bg-black border-b border-slate-900 rounded-2xl mr-3">
               <FileText className="h-8 w-8 text-amber-400" />
             </div>
-            <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30">
+            <Badge className="bg-black border-b border-slate-900 text-amber-300 border-amber-500/30">
               <Crown className="h-4 w-4 mr-1" />
               PREMIUM FEATURE
             </Badge>
@@ -134,7 +134,7 @@ export default function MakeOfferPage() {
           {/* Left Column - Property Summary & Offer Calculator */}
           <div className="space-y-6">
             {/* Property Summary */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Calculator className="h-5 w-5 mr-2 text-emerald-400" />
@@ -169,7 +169,7 @@ export default function MakeOfferPage() {
             </Card>
 
             {/* Offer Metrics */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <DollarSign className="h-5 w-5 mr-2 text-blue-400" />
@@ -343,7 +343,7 @@ export default function MakeOfferPage() {
 
           {/* Right Column - Contract Generation & Status */}
           <div className="space-y-6">
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center justify-between">
                   <div className="flex items-center">
@@ -379,7 +379,7 @@ export default function MakeOfferPage() {
                   
                   <Button
                     onClick={sendOffer}
-                    className="w-full btn-primary-gradient"
+                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold"
                     disabled={!offerAmount || offerStatus === 'sent'}
                   >
                     <Send className="h-4 w-4 mr-2" />
@@ -412,7 +412,7 @@ export default function MakeOfferPage() {
             </Card>
 
             {/* Integration Features */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Crown className="h-5 w-5 mr-2 text-amber-400" />

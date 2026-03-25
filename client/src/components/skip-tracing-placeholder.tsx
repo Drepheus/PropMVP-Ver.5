@@ -4,8 +4,8 @@ import { UserCircle, Lock, Phone, Mail, MapPin, Unlock } from "lucide-react";
 
 export default function SkipTracingPlaceholder() {
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-4">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+      <CardHeader className="bg-black border-b border-slate-900 pb-4">
         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
           Owner Intelligence
           <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -16,7 +16,7 @@ export default function SkipTracingPlaceholder() {
       <CardContent className="p-6">
         <div className="text-center py-4">
           <div className="relative mb-6">
-            <div className="w-20 h-20 bg-gradient-to-r from-purple-600/20 to-amber-600/20 rounded-full flex items-center justify-center mx-auto mb-4 float-animation">
+            <div className="w-20 h-20 bg-black border-b border-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 float-animation">
               <Lock className="text-amber-400 h-8 w-8" />
             </div>
             <div className="absolute -top-1 -right-1 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center mx-auto">
@@ -24,7 +24,7 @@ export default function SkipTracingPlaceholder() {
             </div>
           </div>
           
-          <h4 className="text-xl font-bold text-gradient mb-2">Premium Skip Tracing</h4>
+          <h4 className="text-xl font-bold text-white mb-2">Premium Skip Tracing</h4>
           <p className="text-slate-400 mb-6">Unlock comprehensive owner contact data</p>
           
           <div className="space-y-4 mb-8">
@@ -51,7 +51,7 @@ export default function SkipTracingPlaceholder() {
             </div>
           </div>
           
-          <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25">
+          <Button className="w-full bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black hover:shadow-emerald-500/25 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25">
             <Unlock className="mr-2 h-5 w-5" />
             Upgrade to Premium
           </Button>

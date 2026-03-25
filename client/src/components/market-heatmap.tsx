@@ -211,8 +211,8 @@ export default function MarketHeatmap() {
   };
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-cyan-800/30 to-cyan-700/30 pb-6">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+      <CardHeader className="bg-black border-b border-slate-900 pb-6">
         <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
           Market Activity Heatmap
           <div className="flex items-center gap-3">
@@ -220,7 +220,7 @@ export default function MarketHeatmap() {
               <Button
                 variant="outline"
                 size="sm"
-                className={`glass-card text-xs ${viewMode === "deals" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
+                className={`bg-black border border-slate-900 rounded-[1.5rem] text-xs ${viewMode === "deals" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
                 onClick={() => setViewMode("deals")}
               >
                 Deal Volume
@@ -228,7 +228,7 @@ export default function MarketHeatmap() {
               <Button
                 variant="outline"
                 size="sm"
-                className={`glass-card text-xs ${viewMode === "activity" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
+                className={`bg-black border border-slate-900 rounded-[1.5rem] text-xs ${viewMode === "activity" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
                 onClick={() => setViewMode("activity")}
               >
                 Activity Level
@@ -236,7 +236,7 @@ export default function MarketHeatmap() {
               <Button
                 variant="outline"
                 size="sm"
-                className={`glass-card text-xs ${viewMode === "appreciation" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
+                className={`bg-black border border-slate-900 rounded-[1.5rem] text-xs ${viewMode === "appreciation" ? "bg-cyan-500/20 text-cyan-400" : ""}`}
                 onClick={() => setViewMode("appreciation")}
               >
                 Price Growth
@@ -311,15 +311,15 @@ export default function MarketHeatmap() {
 
             {/* Control Panel */}
             <div className="absolute top-4 left-4 flex flex-col gap-2">
-              <Button variant="outline" size="sm" className="glass-card">
+              <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                 <Filter className="h-4 w-4 mr-2" />
                 Filter
               </Button>
-              <Button variant="outline" size="sm" className="glass-card">
+              <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Reset
               </Button>
-              <Button variant="outline" size="sm" className="glass-card">
+              <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                 <Maximize className="h-4 w-4 mr-2" />
                 Fullscreen
               </Button>
@@ -385,58 +385,58 @@ export default function MarketHeatmap() {
                   </div>
                   
                   <div className="space-y-4">
-                    <div className="glass-card rounded-2xl p-4">
+                    <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-slate-400 text-sm">Deal Volume</span>
                         <div className="p-1 bg-blue-500/20 rounded-lg">
                           <TrendingUp className="h-4 w-4 text-blue-400" />
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-gradient">{selectedRegion.dealCount}</div>
+                      <div className="text-2xl font-bold text-white">{selectedRegion.dealCount}</div>
                       <div className="text-slate-500 text-xs mt-1">Total deals this quarter</div>
                     </div>
 
-                    <div className="glass-card rounded-2xl p-4">
+                    <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-slate-400 text-sm">Avg Deal Value</span>
                         <div className="p-1 bg-emerald-500/20 rounded-lg">
                           <DollarSign className="h-4 w-4 text-emerald-400" />
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-gradient">{formatCurrency(selectedRegion.avgDealValue)}</div>
+                      <div className="text-2xl font-bold text-white">{formatCurrency(selectedRegion.avgDealValue)}</div>
                       <div className="text-slate-500 text-xs mt-1">Assignment fee average</div>
                     </div>
 
-                    <div className="glass-card rounded-2xl p-4">
+                    <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-slate-400 text-sm">Activity Level</span>
                         <div className="p-1 bg-purple-500/20 rounded-lg">
                           <Activity className="h-4 w-4 text-purple-400" />
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-gradient">{selectedRegion.activityLevel}%</div>
+                      <div className="text-2xl font-bold text-white">{selectedRegion.activityLevel}%</div>
                       <div className="text-slate-500 text-xs mt-1">Market activity score</div>
                     </div>
 
-                    <div className="glass-card rounded-2xl p-4">
+                    <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-slate-400 text-sm">Price Appreciation</span>
                         <div className="p-1 bg-orange-500/20 rounded-lg">
                           <Zap className="h-4 w-4 text-orange-400" />
                         </div>
                       </div>
-                      <div className="text-2xl font-bold text-gradient">+{selectedRegion.priceAppreciation}%</div>
+                      <div className="text-2xl font-bold text-white">+{selectedRegion.priceAppreciation}%</div>
                       <div className="text-slate-500 text-xs mt-1">Year over year growth</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <Button className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-medium py-2 px-4 rounded-xl">
+                  <Button className="w-full bg-black border-b border-slate-900 hover:from-cyan-600 hover:to-cyan-700 text-white font-medium py-2 px-4 rounded-xl">
                     <Eye className="h-4 w-4 mr-2" />
                     View Listings
                   </Button>
-                  <Button variant="outline" className="w-full glass-card">
+                  <Button variant="outline" className="w-full bg-black border border-slate-900 rounded-[1.5rem]">
                     <MapPin className="h-4 w-4 mr-2" />
                     Get Directions
                   </Button>

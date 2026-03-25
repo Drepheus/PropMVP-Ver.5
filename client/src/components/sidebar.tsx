@@ -99,13 +99,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 title={isCollapsed ? item.label : undefined}
               >
                 <div className={cn(
-                  "p-2 rounded-xl transition-all duration-300",
+                  "relative p-2 rounded-xl transition-all duration-300",
                   isCollapsed ? "mr-0" : "mr-3",
                   item.active 
                     ? "bg-emerald-500/20 text-emerald-400" 
                     : "bg-slate-900 border border-slate-800 text-slate-500 group-hover:text-white"
                 )}>
-                  <item.icon className="h-5 w-5" />
+                  {item.path === "/property-search" && !item.active && (
+                    <span className="absolute inset-0 rounded-xl bg-emerald-500 opacity-25 animate-ping" />
+                  )}
+                  <item.icon className={cn(
+                    "h-5 w-5 relative z-10", 
+                    item.path === "/property-search" && !item.active && "text-emerald-500/70 group-hover:text-emerald-400"
+                  )} />
                 </div>
                 {!isCollapsed && (
                   <>
@@ -169,7 +175,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <item.icon className="h-4 w-4" />
                 </button>
               ))}
-              <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl flex items-center justify-center">
+              <div className="w-8 h-8 bg-black border-b border-slate-900 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-xs">Pro</span>
               </div>
             </div>

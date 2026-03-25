@@ -326,8 +326,8 @@ export default function PropertyHeatmap() {
   });
 
   return (
-    <Card className="glass-card rounded-3xl shadow-2xl overflow-hidden border border-slate-700/20 backdrop-blur-xl">
-      <CardHeader className="bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95 pb-8 relative overflow-hidden">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-2xl overflow-hidden border border-slate-700/20 backdrop-blur-xl">
+      <CardHeader className="bg-[#050505] border border-slate-900 pb-8 relative overflow-hidden">
         {/* Premium Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-transparent to-blue-500/20"></div>
@@ -343,7 +343,7 @@ export default function PropertyHeatmap() {
         
         <CardTitle className="flex items-center justify-between text-slate-100 text-3xl font-bold relative z-10">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-emerald-500/30 to-blue-500/30 rounded-2xl backdrop-blur-sm border border-white/10">
+            <div className="p-3 bg-black border-b border-slate-900 rounded-2xl backdrop-blur-sm border border-white/10">
               <Target className="h-8 w-8 text-emerald-300" />
             </div>
             <div>
@@ -389,7 +389,7 @@ export default function PropertyHeatmap() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
           
           {/* Interactive Investment Heatmap */}
-          <div className="lg:col-span-2 relative bg-gradient-to-br from-slate-900/80 via-slate-800/70 to-slate-900/90 min-h-[700px] overflow-hidden">
+          <div className="lg:col-span-2 relative bg-[#050505] border border-slate-900 min-h-[700px] overflow-hidden">
             
             {/* Premium Map Background */}
             <div className="absolute inset-0">
@@ -473,7 +473,7 @@ export default function PropertyHeatmap() {
                       </div>
                       
                       {/* Investment Score Badge with Premium Styling */}
-                      <div className="absolute -top-3 -right-3 bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-md text-white text-xs px-2 py-1 rounded-lg border border-slate-600/50 shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 font-bold">
+                      <div className="absolute -top-3 -right-3 bg-black border-b border-slate-900 backdrop-blur-md text-white text-xs px-2 py-1 rounded-lg border border-slate-600/50 shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 font-bold">
                         <div className="text-center">
                           <div className="text-emerald-400">{property.investmentScore}</div>
                           <div className="text-slate-400 text-[10px]">SCORE</div>
@@ -482,7 +482,7 @@ export default function PropertyHeatmap() {
                       
                       {/* Enhanced Hover Details */}
                       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-500 z-40">
-                        <div className="bg-gradient-to-br from-slate-900/98 to-slate-800/95 backdrop-blur-xl text-white text-sm px-4 py-3 rounded-xl border border-slate-600/30 shadow-2xl whitespace-nowrap">
+                        <div className="bg-black border-b border-slate-900 backdrop-blur-xl text-white text-sm px-4 py-3 rounded-xl border border-slate-600/30 shadow-2xl whitespace-nowrap">
                           <div className="flex items-center gap-2 mb-2">
                             <div 
                               className="w-3 h-3 rounded-full shadow-lg"
@@ -523,7 +523,7 @@ export default function PropertyHeatmap() {
 
             {/* Premium Control Panel */}
             <div className="absolute top-6 left-6 flex flex-col gap-3">
-              <div className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 backdrop-blur-xl rounded-2xl p-3 border border-slate-600/30 shadow-2xl">
+              <div className="bg-black border-b border-slate-900 backdrop-blur-xl rounded-2xl p-3 border border-slate-600/30 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <Button variant="outline" size="sm" className="bg-slate-800/50 border-slate-600/50 hover:bg-slate-700/60 hover:border-slate-500/60 transition-all duration-300 text-slate-200">
                     <Filter className="h-4 w-4 mr-2 text-emerald-400" />
@@ -542,7 +542,7 @@ export default function PropertyHeatmap() {
             </div>
 
             {/* Premium Investment Legend */}
-            <div className="absolute bottom-6 left-6 bg-gradient-to-br from-slate-900/98 to-slate-800/95 backdrop-blur-xl rounded-2xl p-5 border border-slate-600/30 shadow-2xl">
+            <div className="absolute bottom-6 left-6 bg-black border-b border-slate-900 backdrop-blur-xl rounded-2xl p-5 border border-slate-600/30 shadow-2xl">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 bg-emerald-500/20 rounded-xl">
                   <Target className="h-4 w-4 text-emerald-400" />
@@ -579,7 +579,7 @@ export default function PropertyHeatmap() {
             </div>
 
             {/* Premium Stats Overlay */}
-            <div className="absolute top-6 right-6 bg-gradient-to-br from-slate-900/98 to-slate-800/95 backdrop-blur-xl rounded-2xl p-5 border border-slate-600/30 shadow-2xl">
+            <div className="absolute top-6 right-6 bg-black border-b border-slate-900 backdrop-blur-xl rounded-2xl p-5 border border-slate-600/30 shadow-2xl">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 bg-blue-500/20 rounded-xl">
                   <Zap className="h-4 w-4 text-blue-400" />
@@ -622,7 +622,7 @@ export default function PropertyHeatmap() {
           </div>
 
           {/* Premium Property Details Panel */}
-          <div className="bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95 p-8 border-l border-slate-600/30 backdrop-blur-xl relative overflow-hidden">
+          <div className="bg-[#050505] border border-slate-900 p-8 border-l border-slate-600/30 backdrop-blur-xl relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
               <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -644,7 +644,7 @@ export default function PropertyHeatmap() {
                       className="w-6 h-6 rounded-full shadow-lg border border-white/20"
                       style={{ backgroundColor: getInvestmentColor(selectedProperty.investmentScore) }}
                     ></div>
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold bg-black border-b border-slate-900 bg-clip-text text-transparent">
                       {selectedProperty.address.split(',')[0]}
                     </h3>
                   </div>
@@ -655,7 +655,7 @@ export default function PropertyHeatmap() {
                   
                 <div className="space-y-6">
                   {/* Investment Score Card */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
+                  <div className="bg-black border-b border-slate-900 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-slate-300 text-lg font-semibold">Investment Score</span>
                       <div className="p-3 bg-emerald-500/20 rounded-2xl">
@@ -671,7 +671,7 @@ export default function PropertyHeatmap() {
                       {/* Score Progress Bar */}
                       <div className="w-full bg-slate-700/50 rounded-full h-3 mt-4 overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full transition-all duration-1000 ease-out"
+                          className="h-full bg-black border-b border-slate-900 rounded-full transition-all duration-1000 ease-out"
                           style={{ width: `${selectedProperty.investmentScore}%` }}
                         ></div>
                       </div>
@@ -679,7 +679,7 @@ export default function PropertyHeatmap() {
                   </div>
 
                   {/* Deal Details Card */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
+                  <div className="bg-black border-b border-slate-900 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-slate-300 text-lg font-semibold">Deal Details</span>
                       <div className="p-3 bg-blue-500/20 rounded-2xl">
@@ -707,7 +707,7 @@ export default function PropertyHeatmap() {
                   </div>
 
                   {/* Risk & Performance Card */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/60 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
+                  <div className="bg-black border-b border-slate-900 backdrop-blur-sm rounded-3xl p-6 border border-slate-600/30 shadow-2xl">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-slate-300 text-lg font-semibold">Risk & Performance</span>
                       <div className="p-3 bg-purple-500/20 rounded-2xl">
@@ -744,7 +744,7 @@ export default function PropertyHeatmap() {
 
                   {/* Action Buttons */}
                   <div className="space-y-3 pt-4">
-                    <Button className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-medium py-3 px-4 rounded-xl">
+                    <Button className="w-full bg-black border-b border-slate-900 hover:from-emerald-600 hover:to-emerald-700 text-white font-medium py-3 px-4 rounded-xl">
                       <Eye className="h-4 w-4 mr-2" />
                       Analyze Deal
                     </Button>

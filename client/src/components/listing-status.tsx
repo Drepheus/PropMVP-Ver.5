@@ -26,8 +26,8 @@ export default function ListingStatus({ property }: ListingStatusProps) {
   };
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-4">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+      <CardHeader className="bg-black border-b border-slate-900 pb-4">
         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
           Listing Status
           <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -37,8 +37,8 @@ export default function ListingStatus({ property }: ListingStatusProps) {
       </CardHeader>
       <CardContent className="p-6">
         <div className="space-y-6">
-          <div className="text-center bg-gradient-to-r from-emerald-900/20 to-emerald-800/20 rounded-2xl p-6 border border-emerald-500/20">
-            <div className="text-4xl font-bold text-gradient mb-2">
+          <div className="text-center bg-black border-b border-slate-900 rounded-2xl p-6 border border-emerald-500/20">
+            <div className="text-4xl font-bold text-white mb-2">
               {formatPrice(property.listPrice)}
             </div>
             <div className="text-slate-400 text-sm font-medium uppercase tracking-wide">Current List Price</div>

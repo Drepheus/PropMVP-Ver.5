@@ -100,8 +100,8 @@ export default function AIAnalysis() {
   };
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden" data-tour="ai-analysis">
-      <CardHeader className="bg-gradient-to-r from-purple-800/30 to-blue-800/30 pb-6">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden" data-tour="ai-analysis">
+      <CardHeader className="bg-black border-b border-slate-900 pb-6">
         <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
           <div className="flex items-center">
             <Brain className="h-6 w-6 text-purple-400 mr-3" />
@@ -146,7 +146,7 @@ export default function AIAnalysis() {
               <Button 
                 onClick={handleAnalyze}
                 disabled={!selectedPropertyId || analysisMutation.isPending}
-                className="btn-primary-gradient min-w-[120px]"
+                className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold min-w-[120px]"
               >
                 {analysisMutation.isPending ? (
                   <div className="flex items-center">
@@ -169,7 +169,7 @@ export default function AIAnalysis() {
           <div className="space-y-6">
             {/* Grade and Score Overview */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="glass-card rounded-2xl p-4 text-center">
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
                 <div className="mb-2">
                   <span className={`text-4xl font-bold px-4 py-2 rounded-xl ${getGradeColor(analysis.grade)}`}>
                     {analysis.grade}
@@ -178,27 +178,27 @@ export default function AIAnalysis() {
                 <p className="text-slate-400 text-sm">Investment Grade</p>
               </div>
               
-              <div className="glass-card rounded-2xl p-4 text-center">
-                <div className="text-3xl font-bold text-gradient mb-2">{analysis.score}</div>
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                <div className="text-3xl font-bold text-white mb-2">{analysis.score}</div>
                 <p className="text-slate-400 text-sm">Score (0-100)</p>
                 <Progress value={analysis.score} className="mt-2 h-2" />
               </div>
               
-              <div className="glass-card rounded-2xl p-4 text-center">
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
                 <div className="text-2xl font-bold text-emerald-400 mb-2">
                   {formatCurrency(analysis.estimatedProfit)}
                 </div>
                 <p className="text-slate-400 text-sm">Est. Profit</p>
               </div>
               
-              <div className="glass-card rounded-2xl p-4 text-center">
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
                 <div className="text-2xl font-bold text-blue-400 mb-2">{analysis.confidenceLevel}%</div>
                 <p className="text-slate-400 text-sm">Confidence</p>
               </div>
             </div>
 
             {/* Executive Summary */}
-            <div className="glass-card rounded-2xl p-6">
+            <div className="bg-black border border-slate-900 rounded-[1.5rem] p-6">
               <h3 className="text-lg font-semibold text-slate-200 mb-3 flex items-center">
                 <Target className="h-5 w-5 text-blue-400 mr-2" />
                 Executive Summary
@@ -219,7 +219,7 @@ export default function AIAnalysis() {
             {/* Strengths and Risks */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Key Strengths */}
-              <div className="glass-card rounded-2xl p-6">
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-6">
                 <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center">
                   <CheckCircle className="h-5 w-5 text-emerald-400 mr-2" />
                   Key Strengths
@@ -235,7 +235,7 @@ export default function AIAnalysis() {
               </div>
 
               {/* Risk Factors */}
-              <div className="glass-card rounded-2xl p-6">
+              <div className="bg-black border border-slate-900 rounded-[1.5rem] p-6">
                 <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center">
                   <AlertTriangle className="h-5 w-5 text-amber-400 mr-2" />
                   Risk Factors
@@ -252,7 +252,7 @@ export default function AIAnalysis() {
             </div>
 
             {/* Detailed Recommendation */}
-            <div className="glass-card rounded-2xl p-6">
+            <div className="bg-black border border-slate-900 rounded-[1.5rem] p-6">
               <h3 className="text-lg font-semibold text-slate-200 mb-4 flex items-center">
                 <TrendingUp className="h-5 w-5 text-purple-400 mr-2" />
                 Investment Recommendation
@@ -264,7 +264,7 @@ export default function AIAnalysis() {
 
         {/* Error Handling */}
         {analysisMutation.isError && (
-          <div className="glass-card rounded-2xl p-6 border border-red-500/30">
+          <div className="bg-black border border-slate-900 rounded-[1.5rem] p-6 border border-red-500/30">
             <div className="flex items-center mb-2">
               <AlertTriangle className="h-5 w-5 text-red-400 mr-2" />
               <h3 className="text-red-400 font-semibold">Analysis Failed</h3>

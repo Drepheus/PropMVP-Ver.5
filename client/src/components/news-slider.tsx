@@ -107,7 +107,7 @@ export default function NewsSlider({
 
   if (loading) {
     return (
-      <Card className={`glass-card rounded-2xl p-6 h-32 ${className}`}>
+      <Card className={`bg-black border border-slate-900 rounded-[1.5rem] p-6 h-32 ${className}`}>
         <div className="animate-pulse flex items-center space-x-4">
           <div className="w-8 h-8 bg-slate-700 rounded-lg"></div>
           <div className="flex-1 space-y-2">
@@ -121,7 +121,7 @@ export default function NewsSlider({
 
   if (!items.length) {
     return (
-      <Card className={`glass-card rounded-2xl p-6 h-32 ${className}`}>
+      <Card className={`bg-black border border-slate-900 rounded-[1.5rem] p-6 h-32 ${className}`}>
         <div className="flex items-center justify-center h-full text-slate-400">
           No news items available
         </div>
@@ -132,7 +132,7 @@ export default function NewsSlider({
   const currentItem = items[currentIndex];
 
   return (
-    <Card className={`glass-card rounded-2xl overflow-hidden ${className}`}>
+    <Card className={`bg-black border border-slate-900 rounded-[1.5rem] overflow-hidden ${className}`}>
       {/* Header */}
       <div className={`bg-gradient-to-r ${
         accentColor === 'orange' ? 'from-orange-800/30 to-red-800/30' : 'from-blue-800/30 to-cyan-800/30'

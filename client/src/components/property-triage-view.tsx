@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { 
   TrendingUp, 
   MapPin, 
@@ -35,6 +36,7 @@ interface PropertyTriageViewProps {
 export default function PropertyTriageView({ property }: PropertyTriageViewProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [location, setLocation] = useLocation();
   const [notes, setNotes] = useState(property.currentLead?.notes || "");
 
   const claimMutation = useMutation({
@@ -45,7 +47,10 @@ export default function PropertyTriageView({ property }: PropertyTriageViewProps
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/leads"] });
       queryClient.invalidateQueries({ queryKey: ["/api/properties/search"] });
-      toast({ title: "Property Claimed", description: "This deal has been added to your pipeline." });
+      toast({ title: "Deal Added to Pipeline", description: "Redirecting to your active workflow..." });
+      
+      // Instantly move the user to the next step
+      setLocation("/lead-management");
     }
   });
 
@@ -223,8 +228,12 @@ export default function PropertyTriageView({ property }: PropertyTriageViewProps
             </div>
 
             <div className="pt-4 flex items-center gap-6">
-               <Button className="bg-emerald-500 hover:bg-emerald-400 text-black font-black h-11 px-8 rounded-xl transition-all shadow-[0_8px_20px_-8px_rgba(16,185,129,0.3)]">
-                  Get contact info
+               <Button 
+                className="bg-emerald-500 hover:bg-emerald-400 text-black font-black h-11 px-8 rounded-xl transition-all shadow-[0_8px_20px_-8px_rgba(16,185,129,0.3)]"
+                onClick={() => property.currentLead ? null : claimMutation.mutate()}
+                disabled={claimMutation.isPending || !!property.currentLead}
+               >
+                  {property.currentLead ? "✓ IN PIPELINE" : "START WORKING ON DEAL"}
                </Button>
                <Button variant="ghost" className="text-slate-500 gap-2 h-11 hover:text-slate-300 transition-colors font-bold text-sm">
                   <User className="h-4 w-4" />
@@ -245,15 +254,24 @@ export default function PropertyTriageView({ property }: PropertyTriageViewProps
           </div>
           
           <div className="space-y-8">
-            <div className="relative group">
+            <div className="relative group flex flex-col items-center">
                <Button
-                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-8 rounded-2xl text-xl transition-all shadow-[0_12px_30px_-10px_rgba(16,185,129,0.25)] border-none"
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-8 rounded-2xl text-xl transition-all shadow-[0_12px_30px_-10px_rgba(16,185,129,0.25)] border-none mb-3"
                 onClick={() => property.currentLead ? null : claimMutation.mutate()}
                 disabled={claimMutation.isPending || !!property.currentLead}
                >
-                {property.currentLead ? "ALREADY CLAIMED" : "Get contact info"}
+                {property.currentLead ? "✓ DEAL ACTIVE IN PIPELINE" : "START WORKING ON DEAL"}
                </Button>
-               {!property.currentLead && <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-slate-600 font-bold uppercase tracking-widest bg-black px-3">Uses 1 skip trace credit</div>}
+               {!property.currentLead && <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-slate-600 font-bold uppercase tracking-widest bg-black px-3">Uses 1 skip trace credit</div>}
+               {property.currentLead && (
+                 <Button 
+                   variant="outline"
+                   className="w-full bg-slate-900/50 hover:bg-slate-800 text-emerald-400 font-bold py-6 rounded-2xl text-sm transition-all border-emerald-500/30"
+                   onClick={() => setLocation("/lead-management")}
+                 >
+                   Continue in Deal Pipeline →
+                 </Button>
+               )}
             </div>
 
             <div className="space-y-3 pt-4">

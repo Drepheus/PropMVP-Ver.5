@@ -22,8 +22,8 @@ export default function MarketAnalysis({ property }: MarketAnalysisProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8" data-tour="market-analysis">
       {/* Market Intelligence Card */}
-      <Card className="glass-card rounded-3xl shadow-lg overflow-hidden h-fit">
-        <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-4">
+      <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden h-fit">
+        <CardHeader className="bg-black border-b border-slate-900 pb-4">
           <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -78,8 +78,8 @@ export default function MarketAnalysis({ property }: MarketAnalysisProps) {
         </CardContent>
       </Card>
       
-      <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+      <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+        <CardHeader className="bg-black border-b border-slate-900 pb-6">
           <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
             Price Trend Analysis
             <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -95,8 +95,8 @@ export default function MarketAnalysis({ property }: MarketAnalysisProps) {
                   <div 
                     className={`w-full rounded-t-lg transition-all duration-500 hover:scale-105 ${
                       index === chartData.length - 1 
-                        ? 'bg-gradient-to-t from-emerald-500 to-emerald-400 shadow-lg shadow-emerald-500/25' 
-                        : 'bg-gradient-to-t from-blue-500 to-blue-400 shadow-lg shadow-blue-500/25'
+                        ? 'bg-black border-b border-slate-900 shadow-lg shadow-emerald-500/25' 
+                        : 'bg-black border-b border-slate-900 shadow-lg shadow-blue-500/25'
                     }`}
                     style={{ height: `${data.height}px` }}
                   />

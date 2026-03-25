@@ -104,14 +104,14 @@ export default function MiniWorkflowAssistant({
       onMouseLeave={() => setIsHovered(false)}
       data-tour="mini-workflow"
     >
-      <Card className={`glass-card shadow-2xl transition-all duration-300 ${
+      <Card className={`bg-black border border-slate-900 rounded-[1.5rem] shadow-2xl transition-all duration-300 ${
         isHovered ? 'w-64' : 'w-16'
       }`}>
         <CardContent className="p-3">
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
-              <div className="p-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg">
+              <div className="p-2 bg-black border-b border-slate-900 rounded-lg">
                 <Zap className="h-4 w-4 text-blue-400" />
               </div>
               {isHovered && (
@@ -137,7 +137,7 @@ export default function MiniWorkflowAssistant({
           <div className={`mb-4 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-50'}`}>
             <div className="w-full bg-slate-800/50 rounded-full h-1.5">
               <div 
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-1.5 rounded-full transition-all duration-500"
+                className="bg-black border-b border-slate-900 h-1.5 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}
               />
             </div>
@@ -238,7 +238,7 @@ export default function MiniWorkflowAssistant({
       {/* Minimal indicator when collapsed */}
       {!isHovered && (
         <div className="absolute -right-2 top-1/2 transform -translate-y-1/2">
-          <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full opacity-60" />
+          <div className="w-1 h-8 bg-black border-b border-slate-900 rounded-full opacity-60" />
         </div>
       )}
     </div>

@@ -12,8 +12,8 @@ export default function ComparableSales({ comparables }: ComparableSalesProps) {
   };
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden" data-tour="comparable-sales">
-      <CardHeader className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 pb-6">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden" data-tour="comparable-sales">
+      <CardHeader className="bg-black border-b border-slate-900 pb-6">
         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-500/20 rounded-xl">

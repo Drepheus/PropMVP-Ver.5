@@ -25,8 +25,8 @@ export default function PropertyImage({ property }: PropertyImageProps) {
                        property.propertyType === "Data Unavailable";
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden" data-tour="property-image">
-      <CardHeader className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 pb-4">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden" data-tour="property-image">
+      <CardHeader className="bg-black border-b border-slate-900 pb-4">
         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
           <div className="flex items-center gap-3">
             Property Image & Overview

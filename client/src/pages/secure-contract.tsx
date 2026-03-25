@@ -88,7 +88,7 @@ export default function SecureContractPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -99,10 +99,10 @@ export default function SecureContractPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <div className="p-3 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl mr-3">
+            <div className="p-3 bg-black border-b border-slate-900 rounded-2xl mr-3">
               <PenTool className="h-8 w-8 text-amber-400" />
             </div>
-            <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30">
+            <Badge className="bg-black border-b border-slate-900 text-amber-300 border-amber-500/30">
               <Crown className="h-4 w-4 mr-1" />
               PREMIUM FEATURE
             </Badge>
@@ -136,7 +136,7 @@ export default function SecureContractPage() {
           {/* Left Column - Contract Overview */}
           <div className="space-y-6">
             {/* Contract Summary */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center justify-between">
                   <div className="flex items-center">
@@ -187,7 +187,7 @@ export default function SecureContractPage() {
             </Card>
 
             {/* Timeline */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Calendar className="h-5 w-5 mr-2 text-blue-400" />
@@ -256,7 +256,7 @@ export default function SecureContractPage() {
                         Upload your signed contract or use our DocuSign integration for electronic signatures.
                       </p>
                       <div className="space-y-3">
-                        <Button className="w-full btn-primary-gradient" onClick={uploadSignedContract}>
+                        <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold" onClick={uploadSignedContract}>
                           <Upload className="h-4 w-4 mr-2" />
                           Upload Signed Contract
                         </Button>
@@ -415,7 +415,7 @@ export default function SecureContractPage() {
 
           {/* Right Column - Integration & Status */}
           <div className="space-y-6">
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Crown className="h-5 w-5 mr-2 text-amber-400" />
@@ -455,7 +455,7 @@ export default function SecureContractPage() {
             </Card>
 
             {/* Next Steps */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Users className="h-5 w-5 mr-2 text-blue-400" />
@@ -488,7 +488,7 @@ export default function SecureContractPage() {
             </Card>
 
             {/* Risk Management */}
-            <Card className="glass-card border-slate-700/30">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Shield className="h-5 w-5 mr-2 text-red-400" />

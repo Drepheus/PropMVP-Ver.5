@@ -59,8 +59,8 @@ export default function ExportActions({ property }: ExportActionsProps) {
   };
 
   return (
-    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-4">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+      <CardHeader className="bg-black border-b border-slate-900 pb-4">
         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -78,7 +78,7 @@ export default function ExportActions({ property }: ExportActionsProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
                 onClick={handleExportJSON}
-                className="glass-card flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
+                className="bg-black border border-slate-900 rounded-[1.5rem] flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
               >
                 <div className="p-3 bg-blue-500/20 rounded-xl group-hover:bg-blue-500/30 transition-colors">
                   <FileCode className="h-6 w-6 text-blue-400" />
@@ -91,7 +91,7 @@ export default function ExportActions({ property }: ExportActionsProps) {
               
               <Button
                 onClick={handleExportPDF}
-                className="glass-card flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
+                className="bg-black border border-slate-900 rounded-[1.5rem] flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
               >
                 <div className="p-3 bg-red-500/20 rounded-xl group-hover:bg-red-500/30 transition-colors">
                   <FileText className="h-6 w-6 text-red-400" />
@@ -104,7 +104,7 @@ export default function ExportActions({ property }: ExportActionsProps) {
               
               <Button
                 onClick={handleExportExcel}
-                className="glass-card flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
+                className="bg-black border border-slate-900 rounded-[1.5rem] flex flex-col items-center space-y-3 py-4 px-4 h-auto rounded-xl group hover:bg-slate-800/40 transition-all duration-300 border border-slate-700/30"
               >
                 <div className="p-3 bg-emerald-500/20 rounded-xl group-hover:bg-emerald-500/30 transition-colors">
                   <FileSpreadsheet className="h-6 w-6 text-emerald-400" />
@@ -116,7 +116,7 @@ export default function ExportActions({ property }: ExportActionsProps) {
               </Button>
             </div>
         
-        <div className="mt-8 p-6 glass-card rounded-2xl border border-slate-600/30">
+        <div className="mt-8 p-6 bg-black border border-slate-900 rounded-[1.5rem] border border-slate-600/30">
           <div className="flex items-start space-x-4">
             <div className="p-2 bg-blue-500/20 rounded-xl">
               <Info className="h-5 w-5 text-blue-400" />

@@ -134,7 +134,7 @@ export default function TargetCriteriaModal({ children, onCriteriaSave }: Target
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {/* Property Basics */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <Home className="h-5 w-5" />
@@ -173,7 +173,7 @@ export default function TargetCriteriaModal({ children, onCriteriaSave }: Target
           </Card>
 
           {/* Price Range */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <DollarSign className="h-5 w-5" />
@@ -201,7 +201,7 @@ export default function TargetCriteriaModal({ children, onCriteriaSave }: Target
           </Card>
 
           {/* Property Features */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <Home className="h-5 w-5" />
@@ -247,7 +247,7 @@ export default function TargetCriteriaModal({ children, onCriteriaSave }: Target
           </Card>
 
           {/* Investment Filters */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <TrendingUp className="h-5 w-5" />
@@ -356,7 +356,7 @@ export default function TargetCriteriaModal({ children, onCriteriaSave }: Target
             </Button>
             <Button
               type="submit"
-              className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700"
+              className="bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black"
             >
               <Zap className="h-4 w-4 mr-2" />
               Save Criteria

@@ -167,7 +167,7 @@ export default function AnalyticsDashboard() {
   };
 
   return (
-    <div className="min-h-screen gradient-bg">
+    <div className="min-h-screen bg-black">
       {/* Navigation Bar */}
       <NavigationBar onMenuClick={() => setSidebarOpen(true)} />
       
@@ -177,7 +177,7 @@ export default function AnalyticsDashboard() {
       {/* Main content */}
       <div className="lg:pl-16 relative z-10">
         {/* Top bar */}
-        <header className="h-18 glass-card border-b border-slate-700/30 flex items-center justify-between px-6 py-4">
+        <header className="h-18 bg-[#050505] border border-slate-900 border-b border-slate-700/30 flex items-center justify-between px-6 py-4">
           <div className="flex items-center space-x-4">
             <Button
               variant="ghost"
@@ -224,7 +224,7 @@ export default function AnalyticsDashboard() {
               <option value="90d">Last 90 days</option>
               <option value="1y">Last year</option>
             </select>
-            <Button className="btn-primary-gradient">
+            <Button className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold">
               <Activity className="mr-2 h-4 w-4" />
               Live Data
             </Button>
@@ -249,7 +249,7 @@ export default function AnalyticsDashboard() {
 
             {/* Header */}
             <div className="text-center">
-              <h1 className="text-5xl font-bold text-gradient mb-4">Wholesaler Command Center</h1>
+              <h1 className="text-5xl font-bold text-white mb-4">Wholesaler Command Center</h1>
               <p className="text-slate-400 text-xl max-w-3xl mx-auto">
                 Advanced analytics, market intelligence, and real-time insights for professional wholesalers
               </p>
@@ -290,13 +290,13 @@ export default function AnalyticsDashboard() {
                   icon={Target}
                   badge="Selected"
                   defaultExpanded={true}
-                  className="gradient-border-card shadow-lg neon-glow"
-                  headerClassName="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30"
+                  className="bg-[#050505] border border-slate-900 shadow-lg "
+                  headerClassName="bg-black border-b border-slate-900"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
                   
                   {/* Location & Property Basics */}
-                  <div className="floating-card rounded-2xl p-6">
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-6">
                     <div className="flex items-center mb-4">
                       <MapPin className="h-5 w-5 text-blue-400 mr-2" />
                       <h3 className="text-lg font-semibold text-slate-200">Location & Property Basics</h3>
@@ -336,7 +336,7 @@ export default function AnalyticsDashboard() {
                   </div>
 
                   {/* Motivation & Distress Indicators */}
-                  <div className="glass-card-enhanced rounded-2xl p-6">
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-6">
                     <div className="flex items-center mb-4">
                       <Zap className="h-5 w-5 text-amber-400 mr-2" />
                       <h3 className="text-lg font-semibold text-slate-200">Motivation & Distress</h3>
@@ -405,7 +405,7 @@ export default function AnalyticsDashboard() {
                   </div>
 
                   {/* Valuation & Deal Analysis */}
-                  <div className="holographic-card rounded-2xl p-6">
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-6">
                     <div className="flex items-center mb-4">
                       <DollarSign className="h-5 w-5 text-emerald-400 mr-2" />
                       <h3 className="text-lg font-semibold text-slate-200">Valuation & Deal Analysis</h3>
@@ -413,7 +413,7 @@ export default function AnalyticsDashboard() {
                     <div className="space-y-3">
                       <div>
                         <p className="text-slate-400 text-sm">Current List Price</p>
-                        <p className="text-2xl font-bold text-gradient">
+                        <p className="text-2xl font-bold text-white">
                           {selectedProperty.listPrice !== '0' ? `$${parseInt(selectedProperty.listPrice).toLocaleString()}` : 'Not Listed'}
                         </p>
                       </div>
@@ -444,7 +444,7 @@ export default function AnalyticsDashboard() {
                   </div>
 
                   {/* Market Data for Dispo */}
-                  <div className="floating-card rounded-2xl p-6">
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-6">
                     <div className="flex items-center mb-4">
                       <TrendingUp className="h-5 w-5 text-purple-400 mr-2" />
                       <h3 className="text-lg font-semibold text-slate-200">Market Data</h3>
@@ -569,12 +569,12 @@ export default function AnalyticsDashboard() {
                   defaultExpanded={false}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-                    <Card className="floating-card rounded-2xl overflow-hidden">
+                    <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Properties Analyzed</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">{formatNumber(properties?.length || 0)}</p>
+                    <p className="text-3xl font-bold text-white mt-1">{formatNumber(properties?.length || 0)}</p>
                   </div>
                   <div className="p-3 bg-blue-500/20 rounded-xl">
                     <Users className="h-6 w-6 text-blue-400" />
@@ -588,12 +588,12 @@ export default function AnalyticsDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card-enhanced rounded-2xl overflow-hidden">
+            <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Active Properties</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">{properties?.length || 0}</p>
+                    <p className="text-3xl font-bold text-white mt-1">{properties?.length || 0}</p>
                   </div>
                   <div className="p-3 bg-emerald-500/20 rounded-xl">
                     <Home className="h-6 w-6 text-emerald-400" />
@@ -607,12 +607,12 @@ export default function AnalyticsDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="holographic-card rounded-2xl overflow-hidden">
+            <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Data Sources</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">MLS</p>
+                    <p className="text-3xl font-bold text-white mt-1">MLS</p>
                   </div>
                   <div className="p-3 bg-amber-500/20 rounded-xl">
                     <Target className="h-6 w-6 text-amber-400" />
@@ -626,12 +626,12 @@ export default function AnalyticsDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="floating-card rounded-2xl overflow-hidden neon-glow">
+            <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden ">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Monthly Revenue</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">{formatCurrency(mockDashboardData.overview.monthlyRevenue)}</p>
+                    <p className="text-3xl font-bold text-white mt-1">{formatCurrency(mockDashboardData.overview.monthlyRevenue)}</p>
                   </div>
                   <div className="p-3 bg-purple-500/20 rounded-xl">
                     <DollarSign className="h-6 w-6 text-purple-400" />
@@ -645,12 +645,12 @@ export default function AnalyticsDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card-enhanced rounded-2xl overflow-hidden">
+            <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Conversion Rate</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">{mockDashboardData.overview.conversionRate}%</p>
+                    <p className="text-3xl font-bold text-white mt-1">{mockDashboardData.overview.conversionRate}%</p>
                   </div>
                   <div className="p-3 bg-emerald-500/20 rounded-xl">
                     <TrendingUp className="h-6 w-6 text-emerald-400" />
@@ -664,12 +664,12 @@ export default function AnalyticsDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="holographic-card rounded-2xl overflow-hidden">
+            <Card className="bg-[#050505] border border-slate-900 rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Avg Deal Size</p>
-                    <p className="text-3xl font-bold text-gradient mt-1">{formatCurrency(mockDashboardData.overview.avgDealSize)}</p>
+                    <p className="text-3xl font-bold text-white mt-1">{formatCurrency(mockDashboardData.overview.avgDealSize)}</p>
                   </div>
                   <div className="p-3 bg-blue-500/20 rounded-xl">
                     <Star className="h-6 w-6 text-blue-400" />
@@ -688,8 +688,8 @@ export default function AnalyticsDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* Deal Pipeline */}
-            <Card className="lg:col-span-2 gradient-border-card shadow-2xl overflow-hidden neon-glow">
-              <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+            <Card className="lg:col-span-2 bg-[#050505] border border-slate-900 shadow-2xl overflow-hidden ">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Deal Pipeline Analysis
                   <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -700,14 +700,14 @@ export default function AnalyticsDashboard() {
               <CardContent className="p-6">
                 <div className="space-y-6">
                   {mockDashboardData.pipeline.map((stage, index) => (
-                    <div key={stage.stage} className="floating-card rounded-2xl p-5">
+                    <div key={stage.stage} className="bg-[#050505] border border-slate-900 rounded-2xl p-5">
                       <div className="flex items-center justify-between mb-4">
                         <div>
                           <h4 className="text-slate-200 font-semibold text-lg">{stage.stage}</h4>
                           <p className="text-slate-400 text-sm">{stage.count} properties</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-2xl font-bold text-gradient">{formatCurrency(stage.value)}</p>
+                          <p className="text-2xl font-bold text-white">{formatCurrency(stage.value)}</p>
                           <p className="text-slate-400 text-sm">total value</p>
                         </div>
                       </div>
@@ -726,8 +726,8 @@ export default function AnalyticsDashboard() {
             </Card>
 
             {/* Recent Activity */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+            <Card className="bg-[#050505] border border-slate-900 rounded-3xl shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                   Recent Activity
                   <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -787,8 +787,8 @@ export default function AnalyticsDashboard() {
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     
                     {/* Deal Pipeline */}
-                    <Card className="lg:col-span-2 gradient-border-card shadow-2xl overflow-hidden neon-glow">
-                      <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+                    <Card className="lg:col-span-2 bg-[#050505] border border-slate-900 shadow-2xl overflow-hidden ">
+                      <CardHeader className="bg-black border-b border-slate-900 pb-6">
                         <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                           Deal Pipeline Analysis
                           <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -799,14 +799,14 @@ export default function AnalyticsDashboard() {
                       <CardContent className="p-6">
                         <div className="space-y-6">
                           {mockDashboardData.pipeline.map((stage, index) => (
-                            <div key={stage.stage} className="floating-card rounded-2xl p-5">
+                            <div key={stage.stage} className="bg-[#050505] border border-slate-900 rounded-2xl p-5">
                               <div className="flex items-center justify-between mb-4">
                                 <div>
                                   <h4 className="text-slate-200 font-semibold text-lg">{stage.stage}</h4>
                                   <p className="text-slate-400 text-sm">{stage.count} properties</p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="text-2xl font-bold text-gradient">{formatCurrency(stage.value)}</p>
+                                  <p className="text-2xl font-bold text-white">{formatCurrency(stage.value)}</p>
                                   <p className="text-slate-400 text-sm">total value</p>
                                 </div>
                               </div>
@@ -825,8 +825,8 @@ export default function AnalyticsDashboard() {
                     </Card>
 
                     {/* Recent Activity */}
-                    <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                      <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+                    <Card className="bg-[#050505] border border-slate-900 rounded-3xl shadow-lg overflow-hidden">
+                      <CardHeader className="bg-black border-b border-slate-900 pb-6">
                         <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                           Recent Activity
                           <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -886,8 +886,8 @@ export default function AnalyticsDashboard() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             {/* Market Trends */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+            <Card className="bg-[#050505] border border-slate-900 rounded-3xl shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Market Intelligence
                   <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -897,29 +897,29 @@ export default function AnalyticsDashboard() {
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="glass-card rounded-2xl p-5 text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">+{mockDashboardData.marketTrends.priceAppreciation}%</div>
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-5 text-center">
+                    <div className="text-3xl font-bold text-white mb-2">+{mockDashboardData.marketTrends.priceAppreciation}%</div>
                     <div className="text-slate-400 text-sm">Price Appreciation</div>
                     <div className="mt-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                       Above Average
                     </div>
                   </div>
-                  <div className="glass-card rounded-2xl p-5 text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">{mockDashboardData.marketTrends.daysOnMarket}</div>
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-5 text-center">
+                    <div className="text-3xl font-bold text-white mb-2">{mockDashboardData.marketTrends.daysOnMarket}</div>
                     <div className="text-slate-400 text-sm">Avg Days on Market</div>
                     <div className="mt-2 text-xs text-blue-400 bg-blue-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                       Fast Market
                     </div>
                   </div>
-                  <div className="glass-card rounded-2xl p-5 text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">{mockDashboardData.marketTrends.inventoryLevel}</div>
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-5 text-center">
+                    <div className="text-3xl font-bold text-white mb-2">{mockDashboardData.marketTrends.inventoryLevel}</div>
                     <div className="text-slate-400 text-sm">Months Inventory</div>
                     <div className="mt-2 text-xs text-amber-400 bg-amber-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                       Low Supply
                     </div>
                   </div>
-                  <div className="glass-card rounded-2xl p-5 text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">{mockDashboardData.marketTrends.demandIndex}</div>
+                  <div className="bg-[#050505] border border-slate-900 rounded-2xl p-5 text-center">
+                    <div className="text-3xl font-bold text-white mb-2">{mockDashboardData.marketTrends.demandIndex}</div>
                     <div className="text-slate-400 text-sm">Demand Index</div>
                     <div className="mt-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                       High Demand
@@ -930,8 +930,8 @@ export default function AnalyticsDashboard() {
             </Card>
 
             {/* Top Markets */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+            <Card className="bg-[#050505] border border-slate-900 rounded-3xl shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Top Markets
                   <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -942,9 +942,9 @@ export default function AnalyticsDashboard() {
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {mockDashboardData.topMarkets.map((market, index) => (
-                    <div key={market.city} className="flex items-center justify-between p-4 glass-card rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div key={market.city} className="flex items-center justify-between p-4 bg-[#050505] border border-slate-900 rounded-2xl hover:scale-105 transition-transform duration-300">
                       <div className="flex items-center space-x-4">
-                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-8 h-8 bg-black border-b border-slate-900 rounded-full flex items-center justify-center text-white font-bold text-sm">
                           {index + 1}
                         </div>
                         <div>
@@ -954,7 +954,7 @@ export default function AnalyticsDashboard() {
                       </div>
                       <div className="text-right">
                         <div className="flex items-center space-x-2">
-                          <span className="text-lg font-bold text-gradient">{market.roi}%</span>
+                          <span className="text-lg font-bold text-white">{market.roi}%</span>
                           {market.trend === 'up' ? (
                             <ArrowUpRight className="h-4 w-4 text-emerald-400" />
                           ) : (

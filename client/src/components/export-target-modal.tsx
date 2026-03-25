@@ -209,7 +209,7 @@ export default function ExportTargetModal({ children, onExportComplete }: Export
 
         <div className="space-y-6">
           {/* Export Summary */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="text-slate-200 text-lg">Export Summary</CardTitle>
             </CardHeader>
@@ -232,7 +232,7 @@ export default function ExportTargetModal({ children, onExportComplete }: Export
           </Card>
 
           {/* Export Format */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <FileText className="h-5 w-5" />
@@ -268,7 +268,7 @@ export default function ExportTargetModal({ children, onExportComplete }: Export
           </Card>
 
           {/* Field Selection */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <Target className="h-5 w-5" />
@@ -319,7 +319,7 @@ export default function ExportTargetModal({ children, onExportComplete }: Export
             <Button
               onClick={handleExport}
               disabled={isExporting || enabledFieldsCount === 0}
-              className="bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700"
+              className="bg-black border-b border-slate-900 hover:from-emerald-700 hover:to-blue-700"
             >
               {isExporting ? (
                 <>

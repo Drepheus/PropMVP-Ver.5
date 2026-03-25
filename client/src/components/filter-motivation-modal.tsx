@@ -177,7 +177,7 @@ export default function FilterMotivationModal({ children, onFilterUpdate }: Filt
 
         <div className="space-y-6">
           {/* Filter Summary */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="text-slate-200 text-lg">Active Filters Summary</CardTitle>
             </CardHeader>
@@ -202,7 +202,7 @@ export default function FilterMotivationModal({ children, onFilterUpdate }: Filt
           </Card>
 
           {/* High Priority Filters */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <AlertTriangle className="h-5 w-5 text-red-400" />
@@ -249,7 +249,7 @@ export default function FilterMotivationModal({ children, onFilterUpdate }: Filt
           </Card>
 
           {/* Medium Priority Filters */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <Clock className="h-5 w-5 text-yellow-400" />
@@ -296,7 +296,7 @@ export default function FilterMotivationModal({ children, onFilterUpdate }: Filt
           </Card>
 
           {/* Low Priority Filters */}
-          <Card className="glass-card">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem]">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-slate-200">
                 <TrendingDown className="h-5 w-5 text-cyan-400" />
@@ -353,7 +353,7 @@ export default function FilterMotivationModal({ children, onFilterUpdate }: Filt
             </Button>
             <Button
               onClick={handleApplyFilters}
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+              className="bg-black border-b border-slate-900 hover:from-orange-700 hover:to-red-700"
             >
               <Zap className="h-4 w-4 mr-2" />
               Apply Filters ({enabledFilters.length})

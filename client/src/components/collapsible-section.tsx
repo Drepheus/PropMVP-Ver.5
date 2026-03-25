@@ -38,7 +38,7 @@ export default function CollapsibleSection({
         isExpanded ? 'neon-border-expanded' : 'neon-border-collapsed'
       }`}></div>
       
-      <Card className="glass-card border-slate-700/30 rounded-xl relative z-10 bg-slate-900/95">
+      <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30 rounded-xl relative z-10 bg-slate-900/95">
       <CardHeader className={`pb-3 ${headerClassName}`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
@@ -53,7 +53,7 @@ export default function CollapsibleSection({
                 {badge && (
                   <Badge 
                     variant={badgeVariant}
-                    className="bg-gradient-to-r from-blue-500/20 to-emerald-500/20 text-white border-blue-500/30"
+                    className="bg-black border-b border-slate-900 text-white border-blue-500/30"
                   >
                     {badge}
                   </Badge>

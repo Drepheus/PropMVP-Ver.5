@@ -457,7 +457,7 @@ export default function MarketIntelligence() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Navigation Bar */}
       <NavigationBar onMenuClick={() => setSidebarOpen(true)} />
       
@@ -482,20 +482,20 @@ export default function MarketIntelligence() {
         
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-gradient mb-4">Define Your Target Market</h1>
+          <h1 className="text-5xl font-bold text-white mb-4">Define Your Target Market</h1>
           <p className="text-slate-400 text-xl max-w-4xl mx-auto">
             Step 1 of Wholesaling: Choose your geographic area and property type. Research high-motivation areas with distressed properties, foreclosures, and motivated sellers to maximize deal potential.
           </p>
           <div className="flex justify-center gap-4 mt-6">
             <TargetCriteriaModal>
-              <Button variant="outline" className="glass-card">
+              <Button variant="outline" className="bg-black border border-slate-900 rounded-[1.5rem]">
                 <Target className="h-4 w-4 mr-2" />
                 Set Target Criteria
               </Button>
             </TargetCriteriaModal>
             
             <FilterMotivationModal onFilterUpdate={handleFilterUpdate}>
-              <Button variant="outline" className={`glass-card ${showFilteredResults ? 'ring-2 ring-orange-400/50' : ''}`}>
+              <Button variant="outline" className={`bg-black border border-slate-900 rounded-[1.5rem] ${showFilteredResults ? 'ring-2 ring-orange-400/50' : ''}`}>
                 <Filter className="h-4 w-4 mr-2" />
                 Filter by Motivation
                 {showFilteredResults && (
@@ -507,7 +507,7 @@ export default function MarketIntelligence() {
             </FilterMotivationModal>
             
             <ExportTargetModal>
-              <Button variant="outline" className="glass-card">
+              <Button variant="outline" className="bg-black border border-slate-900 rounded-[1.5rem]">
                 <Download className="h-4 w-4 mr-2" />
                 Export Target List
               </Button>
@@ -515,7 +515,7 @@ export default function MarketIntelligence() {
             
             <Button 
               variant="outline" 
-              className="glass-card"
+              className="bg-black border border-slate-900 rounded-[1.5rem]"
               onClick={handleUpdateMarketData}
               disabled={isUpdatingData}
             >
@@ -555,8 +555,8 @@ export default function MarketIntelligence() {
             </div>
             
             {/* Geographic Targeting - Right under the feeds */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Geographic Targeting
                   <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -565,7 +565,7 @@ export default function MarketIntelligence() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-slate-200 font-semibold mb-3">Select Target Areas</h4>
                   <div className="grid grid-cols-2 gap-3">
                     <Button variant="outline" className="justify-start">
@@ -616,8 +616,8 @@ export default function MarketIntelligence() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Additional Geographic Options */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Advanced Geographic Tools
                   <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -626,7 +626,7 @@ export default function MarketIntelligence() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-slate-200 font-semibold mb-3">Market Boundaries & Zones</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
@@ -655,8 +655,8 @@ export default function MarketIntelligence() {
             </Card>
 
             {/* Property Type Criteria */}
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                   Property Criteria
                   <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -665,7 +665,7 @@ export default function MarketIntelligence() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-slate-200 font-semibold mb-3">Ideal Property Profile</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
@@ -700,12 +700,12 @@ export default function MarketIntelligence() {
 
           {/* Market Overview Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-tour="market-overview">
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#0a0a0a] border border-slate-900 rounded-[1.5rem] overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Total Markets</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{marketIntelligenceData.overview.totalMarkets}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{marketIntelligenceData.overview.totalMarkets}</p>
                 </div>
                 <div className="p-3 bg-blue-500/20 rounded-xl">
                   <Globe className="h-6 w-6 text-blue-400" />
@@ -717,12 +717,12 @@ export default function MarketIntelligence() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#0a0a0a] border border-slate-900 rounded-[1.5rem] overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Active Listings</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">{formatNumber(marketIntelligenceData.overview.activeListings)}</p>
+                  <p className="text-3xl font-bold text-white mt-1">{formatNumber(marketIntelligenceData.overview.activeListings)}</p>
                 </div>
                 <div className="p-3 bg-emerald-500/20 rounded-xl">
                   <Home className="h-6 w-6 text-emerald-400" />
@@ -734,12 +734,12 @@ export default function MarketIntelligence() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#0a0a0a] border border-slate-900 rounded-[1.5rem] overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Avg Price Growth</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">+{marketIntelligenceData.overview.avgPriceAppreciation}%</p>
+                  <p className="text-3xl font-bold text-white mt-1">+{marketIntelligenceData.overview.avgPriceAppreciation}%</p>
                 </div>
                 <div className="p-3 bg-purple-500/20 rounded-xl">
                   <TrendingUp className="h-6 w-6 text-purple-400" />
@@ -751,12 +751,12 @@ export default function MarketIntelligence() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#0a0a0a] border border-slate-900 rounded-[1.5rem] overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-400 text-sm font-medium uppercase tracking-wide">Market Volume</p>
-                  <p className="text-3xl font-bold text-gradient mt-1">${(marketIntelligenceData.overview.marketVolume / 1000000000).toFixed(1)}B</p>
+                  <p className="text-3xl font-bold text-white mt-1">${(marketIntelligenceData.overview.marketVolume / 1000000000).toFixed(1)}B</p>
                 </div>
                 <div className="p-3 bg-orange-500/20 rounded-xl">
                   <DollarSign className="h-6 w-6 text-orange-400" />
@@ -785,23 +785,23 @@ export default function MarketIntelligence() {
                 Filter Market Data
               </h4>
               <div className="flex flex-wrap gap-3">
-                <Button variant="outline" size="sm" className="glass-card">
+                <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Zap className="h-4 w-4 mr-2" />
                   Foreclosure Density
                 </Button>
-                <Button variant="outline" size="sm" className="glass-card">
+                <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <DollarSign className="h-4 w-4 mr-2" />
                   Tax Delinquent
                 </Button>
-                <Button variant="outline" size="sm" className="glass-card">
+                <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Users className="h-4 w-4 mr-2" />
                   Absentee Owners
                 </Button>
-                <Button variant="outline" size="sm" className="glass-card">
+                <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Home className="h-4 w-4 mr-2" />
                   Property Age (1980-2010)
                 </Button>
-                <Button variant="outline" size="sm" className="glass-card">
+                <Button variant="outline" size="sm" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Activity className="h-4 w-4 mr-2" />
                   Investor Activity
                 </Button>
@@ -813,7 +813,7 @@ export default function MarketIntelligence() {
             
             {/* Heatmap Legend & Insights */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <Card className="glass-card rounded-2xl p-4">
+              <Card className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                 <h4 className="text-slate-200 font-semibold mb-3">Heat Map Legend</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-3">
@@ -835,7 +835,7 @@ export default function MarketIntelligence() {
                 </div>
               </Card>
               
-              <Card className="glass-card rounded-2xl p-4">
+              <Card className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                 <h4 className="text-slate-200 font-semibold mb-3">Targeting Insights</h4>
                 <div className="space-y-2 text-sm text-slate-400">
                   <p>• <span className="text-red-400">Riverside County</span> shows highest foreclosure density</p>
@@ -859,7 +859,7 @@ export default function MarketIntelligence() {
             >
               <div className="space-y-6">
                 {/* Active Filters Summary */}
-                <Card className="glass-card rounded-2xl p-4 bg-gradient-to-r from-orange-900/20 to-red-900/20 border-orange-500/30">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] p-4 bg-black border-b border-slate-900 border-orange-500/30">
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="text-slate-200 font-semibold mb-2 flex items-center">
@@ -891,8 +891,8 @@ export default function MarketIntelligence() {
                 {/* Property Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {filteredProperties.map((property, index) => (
-                    <Card key={property.id} className="glass-card rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="bg-gradient-to-r from-slate-800/30 to-slate-700/30 pb-4">
+                    <Card key={property.id} className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="bg-black border-b border-slate-900 pb-4">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <CardTitle className="text-slate-100 text-lg leading-tight mb-2">
@@ -1007,7 +1007,7 @@ export default function MarketIntelligence() {
                 </div>
 
                 {filteredProperties.length === 0 && (
-                  <Card className="glass-card rounded-2xl p-8 text-center">
+                  <Card className="bg-black border border-slate-900 rounded-[1.5rem] p-8 text-center">
                     <div className="space-y-4">
                       <div className="p-4 bg-slate-800/50 rounded-xl w-fit mx-auto">
                         <Filter className="h-8 w-8 text-slate-400" />
@@ -1040,8 +1040,8 @@ export default function MarketIntelligence() {
           icon={Zap}
           defaultExpanded={false}
         >
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden" data-tour="hot-markets">
-          <CardHeader className="bg-gradient-to-r from-red-800/30 to-orange-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden" data-tour="hot-markets">
+          <CardHeader className="bg-black border-b border-slate-900 pb-6">
             <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
               Hottest Markets
               <div className="p-2 bg-red-500/20 rounded-xl">
@@ -1115,8 +1115,8 @@ export default function MarketIntelligence() {
         >
           {/* Motivation Indicators */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-red-800/30 to-red-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                   Foreclosure Hotspots
                   <div className="p-2 bg-red-500/20 rounded-xl">
@@ -1146,8 +1146,8 @@ export default function MarketIntelligence() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-amber-800/30 to-amber-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                   Tax Delinquent
                   <div className="p-2 bg-amber-500/20 rounded-xl">
@@ -1177,8 +1177,8 @@ export default function MarketIntelligence() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+              <CardHeader className="bg-black border-b border-slate-900 pb-6">
                 <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                   Estate/Probate
                   <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -1210,8 +1210,8 @@ export default function MarketIntelligence() {
           </div>
 
           {/* Wholesaling Target Criteria Helper */}
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-indigo-800/30 to-indigo-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+            <CardHeader className="bg-black border-b border-slate-900 pb-6">
               <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                 Wholesaling Target Criteria
                 <div className="p-2 bg-indigo-500/20 rounded-xl">
@@ -1223,7 +1223,7 @@ export default function MarketIntelligence() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 {/* Geographic Focus */}
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-indigo-400 font-semibold mb-3 flex items-center">
                     <MapPin className="h-4 w-4 mr-2" />
                     Geographic Focus
@@ -1249,7 +1249,7 @@ export default function MarketIntelligence() {
                 </div>
 
                 {/* Property Criteria */}
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-emerald-400 font-semibold mb-3 flex items-center">
                     <Home className="h-4 w-4 mr-2" />
                     Property Criteria
@@ -1275,7 +1275,7 @@ export default function MarketIntelligence() {
                 </div>
 
                 {/* Motivation Indicators */}
-                <div className="glass-card rounded-2xl p-4">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <h4 className="text-red-400 font-semibold mb-3 flex items-center">
                     <Zap className="h-4 w-4 mr-2" />
                     Motivation Signals
@@ -1306,11 +1306,11 @@ export default function MarketIntelligence() {
                   <Target className="h-4 w-4 mr-2" />
                   Save Target Profile
                 </Button>
-                <Button variant="outline" className="glass-card">
+                <Button variant="outline" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Filter className="h-4 w-4 mr-2" />
                   Apply Filters to Search
                 </Button>
-                <Button variant="outline" className="glass-card">
+                <Button variant="outline" className="bg-black border border-slate-900 rounded-[1.5rem]">
                   <Download className="h-4 w-4 mr-2" />
                   Export Target List
                 </Button>
@@ -1329,8 +1329,8 @@ export default function MarketIntelligence() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Market Segments */}
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+            <CardHeader className="bg-black border-b border-slate-900 pb-6">
               <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                 Market Segments
                 <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -1340,7 +1340,7 @@ export default function MarketIntelligence() {
             </CardHeader>
             <CardContent className="p-6 space-y-4">
               {marketIntelligenceData.marketSegments.map((segment, index) => (
-                <div key={index} className="glass-card rounded-2xl p-4">
+                <div key={index} className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-slate-200 font-medium">{segment.segment}</span>
                     <span className="text-slate-300 text-lg font-bold">{segment.volume}%</span>
@@ -1369,8 +1369,8 @@ export default function MarketIntelligence() {
           </Card>
 
           {/* Distressed Properties */}
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-yellow-800/30 to-yellow-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+            <CardHeader className="bg-black border-b border-slate-900 pb-6">
               <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                 Distressed Properties
                 <div className="p-2 bg-yellow-500/20 rounded-xl">
@@ -1380,38 +1380,38 @@ export default function MarketIntelligence() {
             </CardHeader>
             <CardContent className="p-6">
               <div className="grid grid-cols-2 gap-4">
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.foreclosures)}
                   </div>
                   <div className="text-slate-400 text-sm">Foreclosures</div>
                 </div>
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.preForeclosures)}
                   </div>
                   <div className="text-slate-400 text-sm">Pre-Foreclosures</div>
                 </div>
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.taxDelinquent)}
                   </div>
                   <div className="text-slate-400 text-sm">Tax Delinquent</div>
                 </div>
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.bankOwned)}
                   </div>
                   <div className="text-slate-400 text-sm">Bank Owned</div>
                 </div>
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.auctions)}
                   </div>
                   <div className="text-slate-400 text-sm">Auctions</div>
                 </div>
-                <div className="glass-card rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold text-gradient mb-1">
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4 text-center">
+                  <div className="text-2xl font-bold text-white mb-1">
                     {formatNumber(marketIntelligenceData.distressedProperties.probate)}
                   </div>
                   <div className="text-slate-400 text-sm">Probate</div>
@@ -1425,8 +1425,8 @@ export default function MarketIntelligence() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Price Range Analysis */}
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+            <CardHeader className="bg-black border-b border-slate-900 pb-6">
               <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                 Price Range Analysis
                 <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -1436,7 +1436,7 @@ export default function MarketIntelligence() {
             </CardHeader>
             <CardContent className="p-6 space-y-4">
               {marketIntelligenceData.priceRanges.map((range, index) => (
-                <div key={index} className="glass-card rounded-2xl p-4">
+                <div key={index} className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-slate-200 font-medium">{range.range}</span>
                     <span className="text-slate-300 text-sm">{formatNumber(range.count)} listings</span>
@@ -1455,8 +1455,8 @@ export default function MarketIntelligence() {
           </Card>
 
           {/* Investor Activity */}
-          <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+          <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+            <CardHeader className="bg-black border-b border-slate-900 pb-6">
               <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                 Investor Activity
                 <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -1466,29 +1466,29 @@ export default function MarketIntelligence() {
             </CardHeader>
             <CardContent className="p-6">
               <div className="grid grid-cols-2 gap-6">
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <div className="text-3xl font-bold text-gradient mb-2">{marketIntelligenceData.investorMetrics.cashBuyers}%</div>
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-5 text-center">
+                  <div className="text-3xl font-bold text-white mb-2">{marketIntelligenceData.investorMetrics.cashBuyers}%</div>
                   <div className="text-slate-400 text-sm">Cash Buyers</div>
                   <div className="mt-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                     Above Average
                   </div>
                 </div>
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <div className="text-3xl font-bold text-gradient mb-2">{marketIntelligenceData.investorMetrics.flipperActivity}%</div>
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-5 text-center">
+                  <div className="text-3xl font-bold text-white mb-2">{marketIntelligenceData.investorMetrics.flipperActivity}%</div>
                   <div className="text-slate-400 text-sm">Flipper Activity</div>
                   <div className="mt-2 text-xs text-blue-400 bg-blue-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                     Moderate
                   </div>
                 </div>
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <div className="text-3xl font-bold text-gradient mb-2">{marketIntelligenceData.investorMetrics.rentalPurchases}%</div>
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-5 text-center">
+                  <div className="text-3xl font-bold text-white mb-2">{marketIntelligenceData.investorMetrics.rentalPurchases}%</div>
                   <div className="text-slate-400 text-sm">Rental Purchases</div>
                   <div className="mt-2 text-xs text-purple-400 bg-purple-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                     High Activity
                   </div>
                 </div>
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <div className="text-3xl font-bold text-gradient mb-2">{marketIntelligenceData.investorMetrics.institutionalBuying}%</div>
+                <div className="bg-black border border-slate-900 rounded-[1.5rem] p-5 text-center">
+                  <div className="text-3xl font-bold text-white mb-2">{marketIntelligenceData.investorMetrics.institutionalBuying}%</div>
                   <div className="text-slate-400 text-sm">Institutional</div>
                   <div className="mt-2 text-xs text-orange-400 bg-orange-500/20 px-2 py-1 rounded-full w-fit mx-auto">
                     Growing

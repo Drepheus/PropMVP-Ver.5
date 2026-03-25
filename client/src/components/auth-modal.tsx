@@ -139,7 +139,7 @@ export default function AuthModal({ children }: AuthModalProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-md border-white/20">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <DialogTitle className="text-center text-2xl font-bold bg-black border-b border-slate-900 bg-clip-text text-transparent">
             Welcome to PropAnalyzed
           </DialogTitle>
           <DialogDescription className="text-center text-gray-600">
@@ -196,7 +196,7 @@ export default function AuthModal({ children }: AuthModalProps) {
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                className="w-full bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black"
                 disabled={loginMutation.isPending}
               >
                 {loginMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -268,7 +268,7 @@ export default function AuthModal({ children }: AuthModalProps) {
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                className="w-full bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black"
                 disabled={registerMutation.isPending}
               >
                 {registerMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -316,7 +316,7 @@ export default function AuthModal({ children }: AuthModalProps) {
 
         <Button
           onClick={handleAdminBypass}
-          className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white py-3 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
+          className="w-full bg-black border-b border-slate-900 hover:from-orange-600 hover:to-red-700 text-white py-3 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
           disabled={loginMutation.isPending}
         >
           {loginMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

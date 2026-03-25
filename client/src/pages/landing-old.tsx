@@ -22,15 +22,15 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-black border-b border-slate-900 rounded-lg flex items-center justify-center">
                 <TrendingUp className="h-5 w-5 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-black border-b border-slate-900 bg-clip-text text-transparent">
                 PropAnalyzed
               </span>
             </div>
             <AuthModal>
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-6 py-2 rounded-lg transition-all duration-200">
+              <Button className="bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black text-white font-semibold px-6 py-2 rounded-lg transition-all duration-200">
                 Sign In
               </Button>
             </AuthModal>
@@ -47,7 +47,7 @@ export default function Landing() {
             </Badge>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               Transform Your{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-black border-b border-slate-900 bg-clip-text text-transparent">
                 Real Estate
               </span>{" "}
               Investment
@@ -60,7 +60,7 @@ export default function Landing() {
               <AuthModal>
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 text-lg"
+                  className="bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 text-lg"
                 >
                   Get Started Free
                 </Button>
@@ -96,7 +96,7 @@ export default function Landing() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <Search className="h-10 w-10 text-blue-400 mb-4" />
                 <CardTitle className="text-white">Smart Property Search</CardTitle>
@@ -106,7 +106,7 @@ export default function Landing() {
               </CardHeader>
             </Card>
 
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <Brain className="h-10 w-10 text-purple-400 mb-4" />
                 <CardTitle className="text-white">AI Investment Analysis</CardTitle>
@@ -116,7 +116,7 @@ export default function Landing() {
               </CardHeader>
             </Card>
 
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <MapPin className="h-10 w-10 text-green-400 mb-4" />
                 <CardTitle className="text-white">Interactive Heatmaps</CardTitle>
@@ -126,7 +126,7 @@ export default function Landing() {
               </CardHeader>
             </Card>
 
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <BarChart3 className="h-10 w-10 text-yellow-400 mb-4" />
                 <CardTitle className="text-white">Market Intelligence</CardTitle>
@@ -136,7 +136,7 @@ export default function Landing() {
               </CardHeader>
             </Card>
 
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <Users className="h-10 w-10 text-orange-400 mb-4" />
                 <CardTitle className="text-white">Lead Management</CardTitle>
@@ -146,7 +146,7 @@ export default function Landing() {
               </CardHeader>
             </Card>
 
-            <Card className="glass-card bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-black border border-slate-900 rounded-[1.5rem] bg-white/5 border-white/20 hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <Zap className="h-10 w-10 text-pink-400 mb-4" />
                 <CardTitle className="text-white">Export & Reports</CardTitle>
@@ -173,14 +173,14 @@ export default function Landing() {
             <DialogTrigger asChild>
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-12 py-4 rounded-lg transition-all duration-200 text-lg"
+                className="bg-black border-b border-slate-900 hover:bg-emerald-500 hover:text-black text-white font-semibold px-12 py-4 rounded-lg transition-all duration-200 text-lg"
               >
                 Start Your Free Trial
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-md border-white/20">
               <DialogHeader>
-                <DialogTitle className="text-center text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <DialogTitle className="text-center text-2xl font-bold bg-black border-b border-slate-900 bg-clip-text text-transparent">
                   Get Started with PropAnalyzed
                 </DialogTitle>
                 <DialogDescription className="text-center text-gray-600">
@@ -223,10 +223,10 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 bg-black border-b border-slate-900 rounded-lg flex items-center justify-center">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <span className="text-lg font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="text-lg font-semibold bg-black border-b border-slate-900 bg-clip-text text-transparent">
                 PropAnalyzed
               </span>
             </div>

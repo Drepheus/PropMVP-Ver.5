@@ -463,7 +463,7 @@ export default function WorkflowProgress({
   // Show toggle button if workflow is not visible
   if (!isVisible) {
     return (
-      <Card className="glass-card border-slate-700/30 rounded-xl">
+      <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30 rounded-xl">
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -481,7 +481,7 @@ export default function WorkflowProgress({
                 e.stopPropagation();
                 onToggle && onToggle(true);
               }}
-              className="btn-primary-gradient"
+              className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold"
               size="sm"
             >
               Enable Guide
@@ -493,14 +493,14 @@ export default function WorkflowProgress({
   }
 
   return (
-    <Card className="glass-card border-slate-700/30 rounded-xl">
+    <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/30 rounded-xl">
       <CardContent className="p-6">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-white">Deal Workflow Assistant</h3>
             <div className="flex items-center space-x-3">
-              <Badge className="bg-gradient-to-r from-blue-500/20 to-emerald-500/20 text-white border-blue-500/30">
+              <Badge className="bg-black border-b border-slate-900 text-white border-blue-500/30">
                 {Math.round(progress)}% Complete
               </Badge>
               <Button
@@ -528,7 +528,7 @@ export default function WorkflowProgress({
 
         {/* Current Step Highlight */}
         {nextStep && (
-          <div className="mb-6 p-4 bg-gradient-to-r from-blue-500/10 to-emerald-500/10 rounded-xl border border-blue-500/20">
+          <div className="mb-6 p-4 bg-black border-b border-slate-900 rounded-xl border border-blue-500/20">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-blue-500/20 rounded-lg">
@@ -545,7 +545,7 @@ export default function WorkflowProgress({
                   e.stopPropagation();
                   handleNextStep();
                 }}
-                className="btn-primary-gradient"
+                className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold"
                 size="sm"
               >
                 <ArrowRight className="h-4 w-4 mr-1" />
@@ -613,7 +613,7 @@ export default function WorkflowProgress({
                           {step.title}
                         </h4>
                         {(step.id === 'offer' || step.id === 'contract') && (
-                          <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/30 text-xs">
+                          <Badge className="bg-black border-b border-slate-900 text-amber-300 border-amber-500/30 text-xs">
                             <Crown className="h-3 w-3 mr-1" />
                             PREMIUM
                           </Badge>
@@ -686,7 +686,7 @@ export default function WorkflowProgress({
             </div>
             <Button 
               onClick={tourActive ? stopTour : startTour}
-              className={tourActive ? "bg-red-500/20 text-red-300 border-red-500/30" : "btn-primary-gradient"}
+              className={tourActive ? "bg-red-500/20 text-red-300 border-red-500/30" : "bg-emerald-500 hover:bg-emerald-400 text-black font-bold"}
               size="sm"
             >
               {tourActive ? (
@@ -706,7 +706,7 @@ export default function WorkflowProgress({
 
         {/* Completion Message */}
         {progress === 100 && (
-          <div className="mt-6 p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/30">
+          <div className="mt-6 p-4 bg-black border-b border-slate-900 rounded-xl border border-emerald-500/30">
             <div className="flex items-center space-x-3">
               <CheckCircle className="h-6 w-6 text-emerald-400" />
               <div>

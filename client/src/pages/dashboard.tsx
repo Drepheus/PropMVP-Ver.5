@@ -167,8 +167,8 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 
                 {/* ARV Calculator */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-emerald-800/30 to-emerald-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                       ARV Calculator
                       <div className="p-2 bg-emerald-500/20 rounded-xl">
@@ -178,7 +178,7 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <div className="glass-card rounded-2xl p-4">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                         <label className="text-slate-200 font-medium mb-2 block">Current ARV Estimate</label>
                         <Input 
                           type="number"
@@ -198,11 +198,11 @@ export default function Dashboard() {
                       </div>
 
                       <div className="grid grid-cols-2 gap-3 text-sm">
-                        <div className="glass-card rounded-xl p-3">
+                        <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3">
                           <div className="text-slate-400">Comps Analyzed</div>
                           <div className="text-slate-200 font-bold">8 Properties</div>
                         </div>
-                        <div className="glass-card rounded-xl p-3">
+                        <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3">
                           <div className="text-slate-400">Avg Days on Market</div>
                           <div className="text-slate-200 font-bold">22 Days</div>
                         </div>
@@ -212,8 +212,8 @@ export default function Dashboard() {
                 </Card>
 
                 {/* Comparable Sales */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-blue-800/30 to-blue-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                       Recent Comparables
                       <div className="p-2 bg-blue-500/20 rounded-xl">
@@ -228,7 +228,7 @@ export default function Dashboard() {
                         { address: "5678 Pine Ave", price: 495000, sqft: 1920, distance: 0.6, days: 25 },
                         { address: "9012 Elm Dr", price: 475000, sqft: 1780, distance: 0.8, days: 31 }
                       ].map((comp, index) => (
-                        <div key={index} className="glass-card rounded-xl p-3">
+                        <div key={index} className="bg-black border border-slate-900 rounded-[1.5rem] p-3">
                           <div className="flex justify-between items-start mb-2">
                             <div>
                               <div className="text-slate-200 font-medium">{comp.address}</div>
@@ -267,8 +267,8 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 
                 {/* Repair Calculator */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-amber-800/30 to-amber-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                       Repair Calculator
                       <div className="p-2 bg-amber-500/20 rounded-xl">
@@ -278,7 +278,7 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <div className="space-y-4">
-                      <div className="glass-card rounded-2xl p-4">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                         <label className="text-slate-200 font-medium mb-2 block">Total Repair Estimate</label>
                         <Input 
                           type="number"
@@ -300,8 +300,8 @@ export default function Dashboard() {
                 </Card>
 
                 {/* Repair Categories */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-red-800/30 to-red-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                       Repair Categories
                       <div className="p-2 bg-red-500/20 rounded-xl">
@@ -319,7 +319,7 @@ export default function Dashboard() {
                         { category: "Flooring", cost: 5800, priority: "Medium" },
                         { category: "Paint/Cosmetic", cost: 3000, priority: "Low" }
                       ].map((item, index) => (
-                        <div key={index} className="flex justify-between items-center glass-card rounded-xl p-3">
+                        <div key={index} className="flex justify-between items-center bg-black border border-slate-900 rounded-[1.5rem] p-3">
                           <div>
                             <span className="text-slate-200">{item.category}</span>
                             <Badge 
@@ -341,8 +341,8 @@ export default function Dashboard() {
                 </Card>
 
                 {/* Contractor Input */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-purple-800/30 to-purple-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-xl">
                       Contractor Quotes
                       <div className="p-2 bg-purple-500/20 rounded-xl">
@@ -352,14 +352,14 @@ export default function Dashboard() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <div className="space-y-3">
-                      <div className="glass-card rounded-xl p-3">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3">
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-slate-200 font-medium">ABC Contractors</span>
                           <span className="text-emerald-400">$38,500</span>
                         </div>
                         <div className="text-xs text-slate-400">Full renovation • 6-8 weeks</div>
                       </div>
-                      <div className="glass-card rounded-xl p-3">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3">
                         <div className="flex justify-between items-center mb-2">
                           <span className="text-slate-200 font-medium">Quality Home Builders</span>
                           <span className="text-amber-400">$42,200</span>
@@ -388,8 +388,8 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
                 {/* MAO Calculator */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-indigo-800/30 to-indigo-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                       MAO Calculator
                       <div className="p-2 bg-indigo-500/20 rounded-xl">
@@ -401,7 +401,7 @@ export default function Dashboard() {
                     <div className="space-y-6">
                       
                       {/* Wholesale Fee Input */}
-                      <div className="glass-card rounded-2xl p-4">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                         <label className="text-slate-200 font-medium mb-2 block">Wholesale Fee</label>
                         <Input 
                           type="number"
@@ -438,8 +438,8 @@ export default function Dashboard() {
                 </Card>
 
                 {/* Deal Analysis Summary */}
-                <Card className="glass-card rounded-3xl shadow-lg overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-green-800/30 to-green-700/30 pb-6">
+                <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden">
+                  <CardHeader className="bg-black border-b border-slate-900 pb-6">
                     <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
                       Deal Analysis
                       <div className="p-2 bg-green-500/20 rounded-xl">
@@ -452,13 +452,13 @@ export default function Dashboard() {
                       
                       {/* Deal Metrics */}
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="glass-card rounded-xl p-3 text-center">
+                        <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3 text-center">
                           <div className="text-2xl font-bold text-emerald-400">
                             {arvEstimate > 0 ? `${Math.round(((calculatedMAO + repairCosts + wholesaleFee) / arvEstimate) * 100)}%` : '0%'}
                           </div>
                           <div className="text-slate-400 text-sm">ARV Percentage</div>
                         </div>
-                        <div className="glass-card rounded-xl p-3 text-center">
+                        <div className="bg-black border border-slate-900 rounded-[1.5rem] p-3 text-center">
                           <div className="text-2xl font-bold text-blue-400">
                             ${wholesaleFee.toLocaleString()}
                           </div>
@@ -467,7 +467,7 @@ export default function Dashboard() {
                       </div>
 
                       {/* Deal Quality Assessment */}
-                      <div className="glass-card rounded-xl p-4">
+                      <div className="bg-black border border-slate-900 rounded-[1.5rem] p-4">
                         <h4 className="text-slate-200 font-semibold mb-3">Deal Quality</h4>
                         <div className="space-y-2">
                           <div className="flex justify-between">
@@ -489,11 +489,14 @@ export default function Dashboard() {
 
                       {/* Action Buttons */}
                       <div className="space-y-2">
-                        <Button className="w-full bg-green-500 hover:bg-green-600">
+                        <Button 
+                          className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold"
+                          onClick={() => setLocation("/make-offer")}
+                        >
                           <Target className="h-4 w-4 mr-2" />
                           Submit Offer: ${calculatedMAO.toLocaleString()}
                         </Button>
-                        <Button variant="outline" className="w-full glass-card">
+                        <Button variant="outline" className="w-full bg-black border border-slate-900 rounded-[1.5rem]">
                           <Download className="h-4 w-4 mr-2" />
                           Export Deal Analysis
                         </Button>
@@ -579,7 +582,7 @@ export default function Dashboard() {
                   {/* Existing Assessment UI - Repair/MAO Calculators */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     {/* Simplified ARV Card */}
-                    <Card className="glass-card rounded-3xl shadow-lg border-slate-700/50">
+                    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg border-slate-700/50">
                       <CardHeader className="bg-blue-500/5 pb-4">
                         <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
                           <TrendingUp className="h-5 w-5 text-blue-400" />
@@ -599,7 +602,7 @@ export default function Dashboard() {
                     </Card>
 
                     {/* Simplified Repair Card */}
-                    <Card className="glass-card rounded-3xl shadow-lg border-slate-700/50">
+                    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg border-slate-700/50">
                       <CardHeader className="bg-amber-500/5 pb-4">
                         <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
                           <Home className="h-5 w-5 text-amber-400" />
@@ -620,7 +623,7 @@ export default function Dashboard() {
                   </div>
                   
                   {/* MAO Summary */}
-                  <Card className="glass-card rounded-3xl border-slate-700/40 bg-gradient-to-br from-slate-900/50 to-indigo-900/20 p-6">
+                  <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/40 bg-black border-b border-slate-900 p-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                       <div className="space-y-1">
                         <h3 className="text-slate-400 uppercase text-xs font-black tracking-widest">Recommended Max Offer</h3>
@@ -628,7 +631,10 @@ export default function Dashboard() {
                         <p className="text-slate-500 text-sm">Based on 70% rule: ({arvEstimate} × 0.7) - {repairCosts} - {wholesaleFee}</p>
                       </div>
                       <div className="flex gap-4">
-                         <Button className="bg-indigo-500 hover:bg-indigo-600 font-bold px-8 py-6 h-auto">
+                         <Button 
+                            className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-6 h-auto"
+                            onClick={() => setLocation("/make-offer")}
+                         >
                             <Target className="mr-2 h-5 w-5" />
                             GENERATE OFFER
                          </Button>

@@ -141,8 +141,8 @@ export default function ZillowMarketFeeds({ className = "" }: ZillowMarketFeedsP
   };
 
   return (
-    <Card className={`glass-card rounded-3xl shadow-lg overflow-hidden ${className}`} data-tour="zillow-feeds">
-      <CardHeader className="bg-gradient-to-r from-blue-800/30 to-cyan-800/30 pb-6">
+    <Card className={`bg-black border border-slate-900 rounded-[1.5rem] shadow-lg overflow-hidden ${className}`} data-tour="zillow-feeds">
+      <CardHeader className="bg-black border-b border-slate-900 pb-6">
         <CardTitle className="flex items-center justify-between text-slate-100 text-2xl">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-500/20 rounded-xl">
