@@ -158,6 +158,35 @@ export function setupOAuth(app: Express) {
       res.json({ message: "Logged out successfully" });
     });
   });
+
+  // Development admin bypass route
+  app.post("/api/auth/admin-bypass", async (req, res) => {
+    if (process.env.NODE_ENV !== "development") {
+      return res.status(403).json({ message: "Admin bypass only available in development" });
+    }
+
+    try {
+      // Create or get admin user
+      const adminUser = await storage.upsertUser({
+        id: "admin_dev_user",
+        email: "admin@dev.local",
+        firstName: "Admin",
+        lastName: "User",
+        profileImageUrl: null,
+      });
+
+      req.logIn(adminUser, (err) => {
+        if (err) {
+          console.error("Admin bypass login error:", err);
+          return res.status(500).json({ message: "Admin bypass login failed" });
+        }
+        res.json({ success: true, user: adminUser });
+      });
+    } catch (error) {
+      console.error("Admin bypass error details:", error);
+      res.status(500).json({ message: "Admin bypass failed" });
+    }
+  });
 }
 
 export const requireAuth = (req: any, res: any, next: any) => {

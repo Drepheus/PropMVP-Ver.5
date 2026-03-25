@@ -62,6 +62,10 @@ interface RentcastPropertyDetails {
   insurance?: number;
   hoaFees?: number;
   
+  // Owner information
+  ownerName?: string;
+  ownerOccupied?: boolean;
+  
   // Market position
   daysOnMarket?: number;
   listingStatus?: string;
@@ -344,6 +348,20 @@ class RentcastService {
       listingStatus = 'Data Available';
     }
 
+    // Owner & Intelligence Logic
+    const ownerName = rentcastProperty.ownerName || 'Unknown Owner';
+    const ownerOccupied = rentcastProperty.ownerOccupied !== undefined ? rentcastProperty.ownerOccupied : true;
+    
+    // Identify Investor (LLC, Corp, etc.)
+    const investorPattern = /\b(LLC|Corp|Inc|Trust|Holdings|Partners|Management|Associates|Company|Co)\b/i;
+    const investorType = investorPattern.test(ownerName) ? 'Investor (Entity)' : 'Individual';
+
+    // Equity calculation
+    const estimatedValue = listPrice;
+    const lastSalePrice = parseFloat(rentcastProperty.lastSalePrice?.toString() || '0');
+    const equity = estimatedValue > 0 ? (estimatedValue - lastSalePrice) : 0;
+    const equityPercent = estimatedValue > 0 ? Math.round((equity / estimatedValue) * 100) : 0;
+
     // Enhanced property details using authentic Rentcast data or enhanced details
     return {
       address: rentcastProperty.formattedAddress || rentcastProperty.addressLine1 || rentcastProperty.address || 'Address Not Available',
@@ -363,10 +381,21 @@ class RentcastService {
       listingStatus: listingStatus,
       daysOnMarket: rentcastProperty.daysOnMarket || marketData.averageDaysOnMarket || 0,
       pricePerSqft: pricePerSqft,
-      lastSalePrice: (rentcastProperty.lastSalePrice || 0).toString(),
+      lastSalePrice: lastSalePrice.toString(),
       lastSaleDate: rentcastProperty.lastSaleDate || 'N/A',
       createdAt: new Date(),
       
+      // New Intelligence fields
+      ownerName,
+      ownerOccupied,
+      investorType,
+      equity: equity.toString(),
+      equityPercent,
+      estimatedValue: estimatedValue.toString(),
+      liens: '0.00', // Default if not found
+      isListed: listingStatus === 'For Sale' || listingStatus === 'Active',
+      listingHistory: rentcastProperty.priceHistory || [],
+
       // Enhanced comparable sales with accurate Rentcast data
       comparables: comparables.map(comp => {
         const salePrice = comp.price || 0;

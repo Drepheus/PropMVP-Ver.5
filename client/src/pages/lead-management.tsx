@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { PropertyWithDetails } from "@shared/schema";
 import NavigationBar from "@/components/navigation-bar";
 import Sidebar from "@/components/sidebar";
 import WorkflowProgress from "@/components/workflow-progress";
@@ -161,6 +163,10 @@ const leadManagementData = {
 export default function LeadManagement() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [workflowVisible, setWorkflowVisible] = useState(false);
+
+  const { data: leads = [], isLoading } = useQuery<PropertyWithDetails[]>({
+    queryKey: ["/api/leads"],
+  });
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -458,55 +464,48 @@ export default function LeadManagement() {
                       </tr>
                     </thead>
                     <tbody>
-                      {leadManagementData.recentLeads.map((lead) => (
-                        <tr key={lead.id} className="border-t border-slate-700/50 hover:bg-slate-800/30 transition-colors">
+                      {isLoading ? (
+                        <tr><td colSpan={7} className="text-center py-10 text-slate-500">Loading your deals...</td></tr>
+                      ) : leads.length === 0 ? (
+                        <tr><td colSpan={7} className="text-center py-10 text-slate-500">No deals claimed yet. Go to Search & Decide to find your next deal!</td></tr>
+                      ) : leads.map((property) => (
+                        <tr key={property.id} className="border-t border-slate-700/50 hover:bg-slate-800/30 transition-colors">
                           <td className="px-6 py-4">
                             <div>
-                              <div className="font-semibold text-slate-200">{lead.property}</div>
-                              <div className="text-sm text-slate-400">{lead.owner}</div>
-                              <div className="text-xs text-slate-500 mt-1">{lead.source} • {lead.motivation}</div>
+                              <div className="font-semibold text-slate-200">{property.address}</div>
+                              <div className="text-sm text-slate-400">{property.ownerName || "Unknown Owner"}</div>
+                              <div className="text-xs text-slate-500 mt-1">{property.propertyType} • {property.investorType}</div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
                             <div className="space-y-1">
-                              <div className="flex items-center text-sm text-slate-300">
-                                <Phone className="h-3 w-3 mr-2 text-slate-400" />
-                                {lead.phone}
-                              </div>
-                              <div className="flex items-center text-sm text-slate-300">
-                                <Mail className="h-3 w-3 mr-2 text-slate-400" />
-                                {lead.email}
+                              <div className="flex items-center text-sm text-slate-300 italic">
+                                Contact hidden (requires skip tracing)
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center">
-                            <Badge className={`${getStatusColor(lead.status)} border`}>
-                              {lead.status}
+                            <Badge className={`${getStatusColor(property.currentLead?.status?.toLowerCase() || 'new')} border`}>
+                              {property.currentLead?.status || "New"}
                             </Badge>
                           </td>
                           <td className="px-6 py-4 text-center">
-                            <Badge className={`${getPriorityColor(lead.priority)} border`}>
-                              {lead.priority}
+                            <Badge className={`${property.equityPercent! > 50 ? getPriorityColor('high') : getPriorityColor('medium')} border`}>
+                              {property.equityPercent! > 50 ? 'HIGH' : 'NORMAL'}
                             </Badge>
                           </td>
                           <td className="px-6 py-4 text-right">
-                            <div className="text-slate-200 font-medium">{formatCurrency(lead.estimatedValue)}</div>
-                            <div className="text-sm text-emerald-400">{formatCurrency(lead.equity)} equity</div>
+                            <div className="text-slate-200 font-medium">${parseFloat(property.estimatedValue || "0").toLocaleString()}</div>
+                            <div className="text-sm text-emerald-400">${parseFloat(property.equity || "0").toLocaleString()} equity</div>
                           </td>
                           <td className="px-6 py-4">
-                            <div className="text-slate-200 text-sm">{lead.nextAction}</div>
-                            <div className="text-xs text-slate-400 mt-1">Last: {lead.lastContact}</div>
+                            <div className="text-slate-200 text-sm truncate max-w-[150px]">{property.currentLead?.notes || "No notes yet"}</div>
+                            <div className="text-xs text-slate-400 mt-1">Claimed: {new Date(property.currentLead?.claimedAt!).toLocaleDateString()}</div>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center justify-center gap-2">
-                              <Button size="sm" variant="ghost" className="text-slate-400 hover:text-slate-200">
+                              <Button size="sm" variant="ghost" className="text-slate-400 hover:text-slate-200" onClick={() => window.location.href = `/dashboard?property=${property.id}`}>
                                 <Eye className="h-4 w-4" />
-                              </Button>
-                              <Button size="sm" variant="ghost" className="text-slate-400 hover:text-slate-200">
-                                <Edit className="h-4 w-4" />
-                              </Button>
-                              <Button size="sm" variant="ghost" className="text-slate-400 hover:text-slate-200">
-                                <MessageSquare className="h-4 w-4" />
                               </Button>
                             </div>
                           </td>

@@ -1,6 +1,6 @@
-import { properties, comparableSales, marketMetrics, users, type Property, type ComparableSale, type MarketMetrics, type PropertyWithDetails, type PropertySearch, type User, type UpsertUser } from "@shared/schema";
+import { properties, comparableSales, marketMetrics, users, leads, type Property, type ComparableSale, type MarketMetrics, type PropertyWithDetails, type PropertySearch, type User, type UpsertUser, type Lead } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { rentcastService } from "./rentcast-service";
 
 export interface IStorage {
@@ -11,10 +11,18 @@ export interface IStorage {
   createLocalUser(userData: { email: string; passwordHash: string; firstName?: string | null; lastName?: string | null }): Promise<User>;
   
   // Property operations
-  searchProperty(searchData: PropertySearch): Promise<PropertyWithDetails | null>;
-  getPropertyById(id: number): Promise<PropertyWithDetails | null>;
+  searchProperty(searchData: PropertySearch, userId?: string): Promise<PropertyWithDetails | null>;
+  getPropertyById(id: number, userId?: string): Promise<PropertyWithDetails | null>;
   createProperty(propertyData: PropertySearch): Promise<PropertyWithDetails>;
   getAllProperties(): Promise<PropertyWithDetails[]>;
+  updatePropertyIntelligence(id: number, data: Partial<Property>): Promise<Property>;
+
+  // Lead operations
+  claimProperty(userId: string, propertyId: number): Promise<Lead>;
+  updateLeadStatus(leadId: number, status: string): Promise<Lead>;
+  updateLeadNotes(leadId: number, notes: string): Promise<Lead>;
+  getUserLeads(userId: string): Promise<PropertyWithDetails[]>;
+  getLeadForProperty(userId: string, propertyId: number): Promise<Lead | null>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -66,28 +74,37 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Property operations
-  async getPropertyById(id: number): Promise<PropertyWithDetails | null> {
+  async getPropertyById(id: number, userId?: string): Promise<PropertyWithDetails | null> {
     const [property] = await db!.select().from(properties).where(eq(properties.id, id));
     if (!property) return null;
 
     const propertyComparables = await db!.select().from(comparableSales).where(eq(comparableSales.propertyId, id));
     const [propertyMetrics] = await db!.select().from(marketMetrics).where(eq(marketMetrics.propertyId, id));
 
+    let currentLead: Lead | null = null;
+    if (userId) {
+      const [lead] = await db!.select()
+        .from(leads)
+        .where(and(eq(leads.propertyId, id), eq(leads.userId, userId)));
+      currentLead = lead || null;
+    }
+
     return {
       ...property,
       comparables: propertyComparables,
       marketMetrics: propertyMetrics || null,
+      currentLead,
     };
   }
 
-  async searchProperty(searchData: PropertySearch): Promise<PropertyWithDetails | null> {
+  async searchProperty(searchData: PropertySearch, userId?: string): Promise<PropertyWithDetails | null> {
     // Try to find existing property by address
     const [existingProperty] = await db!.select().from(properties).where(
       eq(properties.address, searchData.address)
     );
 
     if (existingProperty) {
-      return this.getPropertyById(existingProperty.id);
+      return this.getPropertyById(existingProperty.id, userId);
     }
 
     // Create new property if not found
@@ -259,6 +276,16 @@ export class DatabaseStorage implements IStorage {
           pricePerSqft: propertyDetailsFromAPI.pricePerSqft,
           lastSalePrice: propertyDetailsFromAPI.lastSalePrice,
           lastSaleDate: propertyDetailsFromAPI.lastSaleDate,
+          // New Intelligence fields
+          ownerName: propertyDetailsFromAPI.ownerName,
+          ownerOccupied: propertyDetailsFromAPI.ownerOccupied,
+          investorType: propertyDetailsFromAPI.investorType,
+          equity: propertyDetailsFromAPI.equity,
+          equityPercent: propertyDetailsFromAPI.equityPercent,
+          estimatedValue: propertyDetailsFromAPI.estimatedValue,
+          liens: propertyDetailsFromAPI.liens,
+          isListed: propertyDetailsFromAPI.isListed,
+          listingHistory: propertyDetailsFromAPI.listingHistory,
         })
         .returning();
 
@@ -342,6 +369,75 @@ export class DatabaseStorage implements IStorage {
       };
     }
   }
+
+  async updatePropertyIntelligence(id: number, data: Partial<Property>): Promise<Property> {
+    const [updated] = await db!
+      .update(properties)
+      .set(data)
+      .where(eq(properties.id, id))
+      .returning();
+    return updated;
+  }
+
+  // Lead operations
+  async claimProperty(userId: string, propertyId: number): Promise<Lead> {
+    const [existingLead] = await db!.select()
+      .from(leads)
+      .where(and(eq(leads.propertyId, propertyId), eq(leads.userId, userId)));
+
+    if (existingLead) return existingLead;
+
+    const [lead] = await db!
+      .insert(leads)
+      .values({
+        userId,
+        propertyId,
+        status: "New",
+      })
+      .returning();
+    return lead;
+  }
+
+  async updateLeadStatus(leadId: number, status: string): Promise<Lead> {
+    const [lead] = await db!
+      .update(leads)
+      .set({ status, updatedAt: new Date() })
+      .where(eq(leads.id, leadId))
+      .returning();
+    return lead;
+  }
+
+  async updateLeadNotes(leadId: number, notes: string): Promise<Lead> {
+    const [lead] = await db!
+      .update(leads)
+      .set({ notes, updatedAt: new Date() })
+      .where(eq(leads.id, leadId))
+      .returning();
+    return lead;
+  }
+
+  async getUserLeads(userId: string): Promise<PropertyWithDetails[]> {
+    const userLeads = await db!
+      .select({
+        lead: leads,
+        property: properties,
+      })
+      .from(leads)
+      .innerJoin(properties, eq(leads.propertyId, properties.id))
+      .where(eq(leads.userId, userId));
+
+    return Promise.all(userLeads.map(async (ul) => {
+      const details = await this.getPropertyById(ul.property.id, userId);
+      return details!;
+    }));
+  }
+
+  async getLeadForProperty(userId: string, propertyId: number): Promise<Lead | null> {
+    const [lead] = await db!.select()
+      .from(leads)
+      .where(and(eq(leads.propertyId, propertyId), eq(leads.userId, userId)));
+    return lead || null;
+  }
 }
 
 export class MemStorage implements IStorage {
@@ -392,13 +488,20 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  async getPropertyById(id: number): Promise<PropertyWithDetails | null> {
-    return this.properties.get(id) || null;
+  async getPropertyById(id: number, userId?: string): Promise<PropertyWithDetails | null> {
+    const property = this.properties.get(id);
+    if (!property) return null;
+    
+    if (userId) {
+      const lead = Array.from(this.leads.values()).find(l => l.propertyId === id && l.userId === userId);
+      return { ...property, currentLead: lead || null };
+    }
+    return property;
   }
 
-  async searchProperty(searchData: PropertySearch): Promise<PropertyWithDetails | null> {
+  async searchProperty(searchData: PropertySearch, userId?: string): Promise<PropertyWithDetails | null> {
     const existing = Array.from(this.properties.values()).find(p => p.address === searchData.address);
-    if (existing) return existing;
+    if (existing) return this.getPropertyById(existing.id, userId);
     return this.createProperty(searchData);
   }
 
@@ -428,13 +531,78 @@ export class MemStorage implements IStorage {
       lastSaleDate: "2022-01-01",
       comparables: [],
       marketMetrics: null,
+      // Default info for new fields
+      ownerName: "John Doe",
+      ownerOccupied: true,
+      investorType: "Individual",
+      equity: "200000",
+      equityPercent: 40,
+      estimatedValue: "500000",
+      liens: "0",
+      isListed: true,
+      listingHistory: [],
     };
     this.properties.set(id, property);
     return property;
   }
 
+  async updatePropertyIntelligence(id: number, data: Partial<Property>): Promise<Property> {
+    const property = this.properties.get(id);
+    if (!property) throw new Error("Property not found");
+    const updated = { ...property, ...data };
+    this.properties.set(id, updated as PropertyWithDetails);
+    return updated as Property;
+  }
+
   async getAllProperties(): Promise<PropertyWithDetails[]> {
     return Array.from(this.properties.values());
+  }
+
+  // Lead operations in memory
+  private leads: Map<number, Lead> = new Map();
+  private leadIdCounter = 1;
+
+  async claimProperty(userId: string, propertyId: number): Promise<Lead> {
+    const existing = Array.from(this.leads.values()).find(l => l.propertyId === propertyId && l.userId === userId);
+    if (existing) return existing;
+
+    const id = this.leadIdCounter++;
+    const lead: Lead = {
+      id,
+      userId,
+      propertyId,
+      status: "New",
+      notes: null,
+      claimedAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.leads.set(id, lead);
+    return lead;
+  }
+
+  async updateLeadStatus(leadId: number, status: string): Promise<Lead> {
+    const lead = this.leads.get(leadId);
+    if (!lead) throw new Error("Lead not found");
+    const updated = { ...lead, status, updatedAt: new Date() };
+    this.leads.set(leadId, updated);
+    return updated;
+  }
+
+  async updateLeadNotes(leadId: number, notes: string): Promise<Lead> {
+    const lead = this.leads.get(leadId);
+    if (!lead) throw new Error("Lead not found");
+    const updated = { ...lead, notes, updatedAt: new Date() };
+    this.leads.set(leadId, updated);
+    return updated;
+  }
+
+  async getUserLeads(userId: string): Promise<PropertyWithDetails[]> {
+    const leads = Array.from(this.leads.values()).filter(l => l.userId === userId);
+    return Promise.all(leads.map(l => this.getPropertyById(l.propertyId, userId))) as Promise<PropertyWithDetails[]>;
+  }
+
+  async getLeadForProperty(userId: string, propertyId: number): Promise<Lead | null> {
+    return Array.from(this.leads.values()).find(l => l.propertyId === propertyId && l.userId === userId) || null;
   }
 }
 

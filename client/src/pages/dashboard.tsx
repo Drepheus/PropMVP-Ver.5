@@ -21,9 +21,14 @@ import {
   Eye,
   FileText,
   Download,
-  RefreshCw,
   MapPin,
-  Clock
+  Calendar,
+  Layers,
+  StickyNote,
+  Flag,
+  Clock,
+  RefreshCw,
+  Users
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +37,8 @@ import { Badge } from "@/components/ui/badge";
 import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import PropertyTriageView from "@/components/property-triage-view";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -112,9 +119,9 @@ export default function Dashboard() {
           
           {/* Page Header */}
           <div className="text-center">
-            <h1 className="text-5xl font-bold text-gradient mb-4">Assess the Property & Deal</h1>
-            <p className="text-slate-400 text-xl max-w-4xl mx-auto">
-              Step 2 of Wholesaling: Evaluate ARV, estimate repair costs, and calculate your Maximum Allowable Offer (MAO) to ensure deal viability.
+            <h1 className="text-6xl font-black text-gradient mb-4 tracking-tighter">SEARCH & DECIDE</h1>
+            <p className="text-slate-400 text-xl max-w-4xl mx-auto font-medium">
+              High-speed real estate triage. Drop an address, get the signals, and decide in 60 seconds.
             </p>
             <div className="flex justify-center gap-4 mt-6">
               <Button variant="outline" className="glass-card">
@@ -498,63 +505,134 @@ export default function Dashboard() {
             </CollapsibleSection>
           )}
 
-          {/* Welcome Message when no property selected */}
+          {/* Property Assessment Tools - Only show if no property selected */}
           {!selectedProperty && !isLoading && (
             <div className="text-center text-slate-400 text-lg">
-              <div className="glass-card rounded-3xl p-10">
-                <h2 className="text-3xl font-bold text-gradient mb-4">Property Assessment Tools</h2>
-                <p className="max-w-2xl mx-auto mb-6">
-                  Search for a property above to begin your deal analysis. Our tools will help you calculate ARV, estimate repairs, and determine your Maximum Allowable Offer using industry-standard wholesaling formulas.
+              <div className="glass-card rounded-3xl p-10 border border-slate-700/30">
+                <div className="flex justify-center mb-6">
+                  <div className="p-4 bg-emerald-500/10 rounded-full ring-1 ring-emerald-500/20">
+                    <Zap className="h-10 w-10 text-emerald-400 animate-pulse" />
+                  </div>
+                </div>
+                <h2 className="text-3xl font-bold text-slate-100 mb-4 tracking-tight">Ready for Triage?</h2>
+                <p className="max-w-xl mx-auto mb-8 text-slate-400">
+                  Our intelligence engine pulls deep property data instantly. Search an address to see equity signals, owner details, and more.
                 </p>
-                <div className="flex justify-center gap-4">
-                  <div className="glass-card rounded-2xl p-4 text-center">
-                    <Calculator className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-                    <h3 className="text-slate-200 font-semibold">ARV Analysis</h3>
-                    <p className="text-sm text-slate-400">Comparable sales research</p>
+                <div className="flex justify-center flex-wrap gap-4">
+                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
+                    <TrendingUp className="h-6 w-6 text-emerald-400 mx-auto mb-3" />
+                    <h3 className="text-slate-200 font-semibold text-sm">Equity Signals</h3>
+                    <p className="text-[10px] text-slate-500 uppercase mt-1">Instant Math</p>
                   </div>
-                  <div className="glass-card rounded-2xl p-4 text-center">
-                    <Home className="h-8 w-8 text-amber-400 mx-auto mb-2" />
-                    <h3 className="text-slate-200 font-semibold">Repair Estimation</h3>
-                    <p className="text-sm text-slate-400">Contractor quotes & categories</p>
+                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
+                    <Users className="h-6 w-6 text-blue-400 mx-auto mb-3" />
+                    <h3 className="text-slate-200 font-semibold text-sm">Owner Identity</h3>
+                    <p className="text-[10px] text-slate-500 uppercase mt-1">Distress Signals</p>
                   </div>
-                  <div className="glass-card rounded-2xl p-4 text-center">
-                    <Target className="h-8 w-8 text-indigo-400 mx-auto mb-2" />
-                    <h3 className="text-slate-200 font-semibold">MAO Calculator</h3>
-                    <p className="text-sm text-slate-400">70% rule implementation</p>
+                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
+                    <Target className="h-6 w-6 text-purple-400 mx-auto mb-3" />
+                    <h3 className="text-slate-200 font-semibold text-sm">Lead Pipeline</h3>
+                    <p className="text-[10px] text-slate-500 uppercase mt-1">One-Click Claim</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {isLoading && (
-            <div className="glass-card rounded-3xl p-10 mb-8 slide-up">
-              <div className="flex flex-col items-center space-y-6">
-                <div className="relative">
-                  <div className="animate-spin rounded-full h-12 w-12 border-2 border-transparent border-t-blue-500 border-r-emerald-500"></div>
-                  <div className="absolute inset-0 rounded-full border-2 border-slate-700/20"></div>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-slate-100 mb-2">Enriching Property Data</h3>
-                  <p className="text-slate-400 max-w-md">Analyzing property details, market comparables, and neighborhood insights</p>
-                </div>
-                <div className="w-full max-w-md">
-                  <div className="bg-slate-700/20 rounded-full h-2 overflow-hidden">
-                    <div className="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full pulse-slow animate-pulse" style={{width: "75%"}}></div>
-                  </div>
-                  <div className="flex justify-between text-xs text-slate-500 mt-2">
-                    <span>Property Details</span>
-                    <span>Market Analysis</span>
-                    <span>Comparables</span>
-                  </div>
-                </div>
-                </div>
-              </div>
-            )}
-
           {selectedProperty && !isLoading && (
-            <div className="slide-up">
-              <PropertyDashboard property={selectedProperty} />
+            <div className="space-y-8 animate-in fade-in duration-700">
+              <Tabs defaultValue="triage" className="w-full">
+                <div className="flex justify-between items-center mb-6">
+                  <TabsList className="bg-slate-900/50 border border-slate-700/50 p-1 rounded-xl">
+                    <TabsTrigger value="triage" className="rounded-lg data-[state=active]:bg-emerald-500 data-[state=active]:text-slate-950 px-6 py-2 font-bold transition-all">
+                      <Zap className="h-4 w-4 mr-2" />
+                      TRIAGE VIEW
+                    </TabsTrigger>
+                    <TabsTrigger value="assess" className="rounded-lg data-[state=active]:bg-blue-500 data-[state=active]:text-white px-6 py-2 font-bold transition-all">
+                      <BarChart3 className="h-4 w-4 mr-2" />
+                      FULL ANALYSIS
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="flex flex-col items-end">
+                      <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Active Search</span>
+                      <span className="text-sm font-bold text-slate-200">{selectedProperty.address}</span>
+                    </div>
+                    <Button variant="ghost" size="icon" onClick={() => setSelectedProperty(null)} className="h-10 w-10 text-slate-400 hover:text-white">
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+
+                <TabsContent value="triage" className="mt-0">
+                  <PropertyTriageView property={selectedProperty} />
+                </TabsContent>
+
+                <TabsContent value="assess" className="mt-0 space-y-8">
+                  {/* Existing Assessment UI - Repair/MAO Calculators */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    {/* Simplified ARV Card */}
+                    <Card className="glass-card rounded-3xl shadow-lg border-slate-700/50">
+                      <CardHeader className="bg-blue-500/5 pb-4">
+                        <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
+                          <TrendingUp className="h-5 w-5 text-blue-400" />
+                          ARV Analysis
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <Input 
+                          type="number"
+                          placeholder="Adjust ARV estimate"
+                          value={arvEstimate || ''}
+                          onChange={(e) => setArvEstimate(Number(e.target.value))}
+                          className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
+                        />
+                        <div className="text-3xl font-black text-emerald-400">${(arvEstimate || 0).toLocaleString()}</div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Simplified Repair Card */}
+                    <Card className="glass-card rounded-3xl shadow-lg border-slate-700/50">
+                      <CardHeader className="bg-amber-500/5 pb-4">
+                        <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
+                          <Home className="h-5 w-5 text-amber-400" />
+                          Repair Costs
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-4">
+                        <Input 
+                          type="number"
+                          placeholder="Estimate repairs"
+                          value={repairCosts || ''}
+                          onChange={(e) => setRepairCosts(Number(e.target.value))}
+                          className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
+                        />
+                        <div className="text-3xl font-black text-amber-400">${(repairCosts || 0).toLocaleString()}</div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  {/* MAO Summary */}
+                  <Card className="glass-card rounded-3xl border-slate-700/40 bg-gradient-to-br from-slate-900/50 to-indigo-900/20 p-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                      <div className="space-y-1">
+                        <h3 className="text-slate-400 uppercase text-xs font-black tracking-widest">Recommended Max Offer</h3>
+                        <div className="text-5xl font-black text-white tracking-tighter">${calculatedMAO.toLocaleString()}</div>
+                        <p className="text-slate-500 text-sm">Based on 70% rule: ({arvEstimate} × 0.7) - {repairCosts} - {wholesaleFee}</p>
+                      </div>
+                      <div className="flex gap-4">
+                         <Button className="bg-indigo-500 hover:bg-indigo-600 font-bold px-8 py-6 h-auto">
+                            <Target className="mr-2 h-5 w-5" />
+                            GENERATE OFFER
+                         </Button>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <PropertyDashboard property={selectedProperty} />
+                </TabsContent>
+              </Tabs>
             </div>
           )}
         </div>

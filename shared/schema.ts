@@ -23,7 +23,27 @@ export const properties = pgTable("properties", {
   pricePerSqft: decimal("price_per_sqft", { precision: 8, scale: 2 }),
   lastSalePrice: decimal("last_sale_price", { precision: 12, scale: 2 }),
   lastSaleDate: text("last_sale_date"),
+  // New "Intelligence" fields
+  ownerName: text("owner_name"),
+  ownerOccupied: boolean("owner_occupied"),
+  investorType: text("investor_type"), // 'Individual', 'LLC', 'Corp', etc.
+  equity: decimal("equity", { precision: 12, scale: 2 }),
+  equityPercent: integer("equity_percent"),
+  estimatedValue: decimal("estimated_value", { precision: 12, scale: 2 }),
+  liens: decimal("liens", { precision: 12, scale: 2 }),
+  isListed: boolean("is_listed"),
+  listingHistory: jsonb("listing_history"),
   createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const leads = pgTable("leads", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  propertyId: integer("property_id").notNull().references(() => properties.id),
+  status: text("status").notNull().default("New"), // 'New', 'Follow Up', 'Hot', 'Dead', 'Closed'
+  notes: text("notes"),
+  claimedAt: timestamp("claimed_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const comparableSales = pgTable("comparable_sales", {
@@ -87,6 +107,7 @@ export type PropertySearch = z.infer<typeof propertySearchSchema>;
 export type Property = typeof properties.$inferSelect;
 export type ComparableSale = typeof comparableSales.$inferSelect;
 export type MarketMetrics = typeof marketMetrics.$inferSelect;
+export type Lead = typeof leads.$inferSelect;
 
 export type UpsertUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
@@ -94,4 +115,5 @@ export type User = typeof users.$inferSelect;
 export type PropertyWithDetails = Property & {
   comparables: ComparableSale[];
   marketMetrics: MarketMetrics | null;
+  currentLead?: Lead | null;
 };

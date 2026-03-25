@@ -49,7 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/properties/search", requireAuth, async (req, res) => {
     try {
       const searchData = propertySearchSchema.parse(req.body);
-      const property = await storage.searchProperty(searchData);
+      const property = await storage.searchProperty(searchData, (req.user as any)?.id);
 
       if (!property) {
         return res.status(404).json({ message: "Property not found" });
@@ -72,7 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid property ID" });
       }
 
-      const property = await storage.getPropertyById(id);
+      const property = await storage.getPropertyById(id, (req.user as any)?.id);
 
       if (!property) {
         return res.status(404).json({ message: "Property not found" });
@@ -140,6 +140,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Lead Management Endpoints
+  app.post("/api/leads/claim", requireAuth, async (req, res) => {
+    try {
+      const { propertyId } = z.object({ propertyId: z.number() }).parse(req.body);
+      const userId = (req.user as any).id;
+      const lead = await storage.claimProperty(userId, propertyId);
+      res.json(lead);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to claim property" });
+    }
+  });
+
+  app.get("/api/leads", requireAuth, async (req, res) => {
+    try {
+      const userId = (req.user as any).id;
+      const leads = await storage.getUserLeads(userId);
+      res.json(leads);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch leads" });
+    }
+  });
+
+  app.patch("/api/leads/:id/status", requireAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { status } = z.object({ status: z.string() }).parse(req.body);
+      const lead = await storage.updateLeadStatus(id, status);
+      res.json(lead);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update lead status" });
+    }
+  });
+
+  app.patch("/api/leads/:id/notes", requireAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { notes } = z.object({ notes: z.string() }).parse(req.body);
+      const lead = await storage.updateLeadNotes(id, notes);
+      res.json(lead);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update lead notes" });
+    }
+  });
+
   app.post("/api/auth/logout", (req, res) => {
     req.logout((err) => {
       if (err) {
@@ -147,34 +191,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       res.json({ message: "Logged out successfully" });
     });
-  });
-
-  // Development admin bypass route
-  app.post("/api/auth/admin-bypass", async (req, res) => {
-    if (process.env.NODE_ENV !== "development") {
-      return res.status(403).json({ message: "Admin bypass only available in development" });
-    }
-
-    try {
-      // Create or get admin user
-      const adminUser = await storage.upsertUser({
-        id: "admin_dev_user",
-        email: "admin@dev.local",
-        firstName: "Admin",
-        lastName: "User",
-        profileImageUrl: null,
-      });
-
-      req.login(adminUser, (err) => {
-        if (err) {
-          return res.status(500).json({ message: "Admin bypass login failed" });
-        }
-        res.json({ success: true, user: adminUser });
-      });
-    } catch (error) {
-      console.error("Admin bypass error:", error);
-      res.status(500).json({ message: "Admin bypass failed" });
-    }
   });
 
   const httpServer = createServer(app);
