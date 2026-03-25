@@ -56,7 +56,7 @@ export default function NavigationBar({ onMenuClick }: NavigationBarProps) {
   ];
 
   return (
-    <nav className="sticky top-0 z-30 w-full border-b border-slate-700/30 bg-slate-950/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-30 w-full border-b border-slate-900 bg-black/90 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
@@ -71,11 +71,11 @@ export default function NavigationBar({ onMenuClick }: NavigationBarProps) {
               <Menu className="h-5 w-5" />
             </Button>
             
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                <Home className="text-white h-4 w-4" />
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+                <Home className="text-black h-4 w-4" />
               </div>
-              <span className="text-xl font-bold text-gradient hidden sm:block">
+              <span className="text-xl font-bold text-white tracking-tight hidden sm:block">
                 PropAnalyzed
               </span>
             </Link>
@@ -88,10 +88,10 @@ export default function NavigationBar({ onMenuClick }: NavigationBarProps) {
                 <Button
                   variant="ghost"
                   className={cn(
-                    "px-4 py-2 rounded-xl transition-all duration-300 flex items-center space-x-2",
+                    "px-4 py-2 rounded-xl transition-all duration-300 flex items-center space-x-2 font-bold text-xs uppercase tracking-widest",
                     item.active
-                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/30"
+                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      : "text-slate-500 hover:text-white"
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -108,8 +108,8 @@ export default function NavigationBar({ onMenuClick }: NavigationBarProps) {
               variant="ghost"
               onClick={() => toggleMiniWorkflow()}
               className={cn(
-                "text-slate-400 hover:text-slate-200 hover:bg-slate-700/30 p-2 rounded-xl transition-all duration-300",
-                miniWorkflowEnabled && "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                "text-slate-500 hover:text-white p-2 rounded-xl transition-all duration-300",
+                miniWorkflowEnabled && "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
               )}
               title={miniWorkflowEnabled ? "Hide Deal Workflow" : "Show Deal Workflow"}
             >
@@ -139,10 +139,10 @@ export default function NavigationBar({ onMenuClick }: NavigationBarProps) {
                   variant="ghost"
                   size="sm"
                   className={cn(
-                    "w-full px-2 py-2 rounded-xl transition-all duration-300 flex flex-col items-center space-y-1 text-xs",
+                    "w-full px-2 py-2 rounded-xl transition-all duration-300 flex flex-col items-center space-y-1 text-[10px] font-black uppercase tracking-tight",
                     item.active
-                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/30"
+                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      : "text-slate-500 hover:text-white"
                   )}
                 >
                   <item.icon className="h-4 w-4" />

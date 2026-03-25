@@ -38,21 +38,21 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       
       {/* Modern Sidebar */}
       <div className={cn(
-        "fixed inset-y-0 left-0 z-50 sidebar-bg transform transition-all duration-300",
+        "fixed inset-y-0 left-0 z-50 bg-black border-r border-slate-900 transform transition-all duration-300",
         isCollapsed ? "w-16" : "w-64",
         isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         <div className="flex items-center justify-between h-18 px-3 border-b border-slate-700/30">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl flex items-center justify-center float-animation">
-              <Home className="text-white h-5 w-5" />
+            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center">
+              <Home className="text-black h-5 w-5" />
             </div>
             {!isCollapsed && (
               <div>
-                <span className="text-xl font-bold text-gradient">
+                <span className="text-xl font-bold text-white tracking-tight">
                   PropAnalyzed
                 </span>
-                <div className="text-xs text-slate-400 mt-0.5">Professional</div>
+                <div className="text-[10px] text-slate-600 font-black uppercase mt-0.5 tracking-[0.1em]">Professional</div>
               </div>
             )}
           </div>
@@ -93,8 +93,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   "flex items-center w-full text-left rounded-2xl transition-all duration-300 group relative",
                   isCollapsed ? "px-3 py-3 justify-center" : "px-5 py-4",
                   item.active 
-                    ? "text-slate-200 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 border border-blue-500/30 shadow-lg" 
-                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/40"
+                    ? "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20" 
+                    : "text-slate-500 hover:text-white"
                 )}
                 title={isCollapsed ? item.label : undefined}
               >
@@ -102,8 +102,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   "p-2 rounded-xl transition-all duration-300",
                   isCollapsed ? "mr-0" : "mr-3",
                   item.active 
-                    ? "bg-blue-500/20 text-blue-400" 
-                    : "bg-slate-700/30 text-slate-400 group-hover:bg-slate-700/50 group-hover:text-slate-300"
+                    ? "bg-emerald-500/20 text-emerald-400" 
+                    : "bg-slate-900 border border-slate-800 text-slate-500 group-hover:text-white"
                 )}>
                   <item.icon className="h-5 w-5" />
                 </div>
@@ -111,12 +111,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <>
                     <span className="font-semibold">{item.label}</span>
                     {item.active && (
-                      <div className="ml-auto w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <div className="ml-auto w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
                     )}
                   </>
                 )}
                 {isCollapsed && item.active && (
-                  <div className="absolute right-1 top-1 w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="absolute right-1 top-1 w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
                 )}
               </button>
             ))}
@@ -124,7 +124,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           
           {!isCollapsed && (
             <>
-              <div className="mt-10 pt-8 border-t border-slate-700/30">
+              <div className="mt-10 pt-8 border-t border-slate-900">
                 <div className="px-5 py-3">
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Settings</p>
                 </div>
@@ -143,14 +143,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </div>
               </div>
               
-              <div className="mt-8 p-4 glass-card rounded-2xl">
+              <div className="mt-8 p-6 bg-[#050505] border border-slate-900 rounded-2xl">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                    <span className="text-white font-bold text-sm">Pro</span>
+                  <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center mx-auto mb-4 border border-emerald-500/20">
+                    <span className="text-emerald-500 font-black text-xs">PRO</span>
                   </div>
-                  <h4 className="text-slate-200 font-semibold text-sm mb-1">Upgrade to Pro</h4>
-                  <p className="text-slate-400 text-xs mb-3">Unlock skip tracing & advanced analytics</p>
-                  <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-medium py-2 px-4 rounded-xl text-xs transition-all duration-300">
+                  <h4 className="text-white font-bold text-sm mb-1">Upgrade to Pro</h4>
+                  <p className="text-slate-600 text-[10px] font-bold uppercase tracking-tight mb-4">Unlock skip tracing</p>
+                  <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2 rounded-lg text-xs transition-all">
                     Upgrade Now
                   </Button>
                 </div>

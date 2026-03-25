@@ -92,7 +92,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen gradient-bg">
+    <div className="min-h-screen bg-black">
       {/* Navigation Bar */}
       <NavigationBar onMenuClick={() => setSidebarOpen(true)} />
       
@@ -118,25 +118,25 @@ export default function Dashboard() {
           </div>
           
           {/* Page Header */}
-          <div className="text-center">
-            <h1 className="text-6xl font-black text-gradient mb-4 tracking-tighter">SEARCH & DECIDE</h1>
-            <p className="text-slate-400 text-xl max-w-4xl mx-auto font-medium">
+          <div className="text-center py-12">
+            <h1 className="text-7xl font-black text-white mb-4 tracking-[-0.05em]">SEARCH & DECIDE</h1>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
               High-speed real estate triage. Drop an address, get the signals, and decide in 60 seconds.
             </p>
-            <div className="flex justify-center gap-4 mt-6">
-              <Button variant="outline" className="glass-card">
+            <div className="flex justify-center flex-wrap gap-4 mt-10">
+              <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
                 <Calculator className="h-4 w-4 mr-2" />
                 ARV Calculator
               </Button>
-              <Button variant="outline" className="glass-card">
+              <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
                 <Home className="h-4 w-4 mr-2" />
                 Repair Estimator
               </Button>
-              <Button variant="outline" className="glass-card">
+              <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
                 <Target className="h-4 w-4 mr-2" />
                 MAO Calculator
               </Button>
-              <Button variant="outline" className="glass-card">
+              <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
                 <Download className="h-4 w-4 mr-2" />
                 Deal Analysis Report
               </Button>
@@ -507,32 +507,38 @@ export default function Dashboard() {
 
           {/* Property Assessment Tools - Only show if no property selected */}
           {!selectedProperty && !isLoading && (
-            <div className="text-center text-slate-400 text-lg">
-              <div className="glass-card rounded-3xl p-10 border border-slate-700/30">
-                <div className="flex justify-center mb-6">
-                  <div className="p-4 bg-emerald-500/10 rounded-full ring-1 ring-emerald-500/20">
-                    <Zap className="h-10 w-10 text-emerald-400 animate-pulse" />
+            <div className="text-center text-slate-400 text-lg py-12">
+              <div className="bg-[#050505] border border-slate-900 rounded-[2.5rem] p-16 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                   <Target className="h-64 w-64 -mr-20 -mt-20 text-emerald-500" />
+                </div>
+                
+                <div className="flex justify-center mb-10 relative">
+                  <div className="p-6 bg-emerald-500/10 rounded-3xl border border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+                    <Zap className="h-12 w-12 text-emerald-500 animate-pulse" />
                   </div>
                 </div>
-                <h2 className="text-3xl font-bold text-slate-100 mb-4 tracking-tight">Ready for Triage?</h2>
-                <p className="max-w-xl mx-auto mb-8 text-slate-400">
+                
+                <h2 className="text-4xl font-bold text-white mb-4 tracking-tight relative">Ready for Triage?</h2>
+                <p className="max-w-xl mx-auto mb-12 text-slate-500 text-lg leading-relaxed relative">
                   Our intelligence engine pulls deep property data instantly. Search an address to see equity signals, owner details, and more.
                 </p>
-                <div className="flex justify-center flex-wrap gap-4">
-                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
-                    <TrendingUp className="h-6 w-6 text-emerald-400 mx-auto mb-3" />
-                    <h3 className="text-slate-200 font-semibold text-sm">Equity Signals</h3>
-                    <p className="text-[10px] text-slate-500 uppercase mt-1">Instant Math</p>
+                
+                <div className="flex justify-center flex-wrap gap-6 relative">
+                  <div className="bg-black border border-slate-900 rounded-[2rem] p-8 w-64 transition-all hover:bg-slate-950 hover:border-emerald-500/30">
+                    <TrendingUp className="h-8 w-8 text-emerald-500 mb-4" />
+                    <h3 className="text-white font-bold text-base mb-1">Equity Signals</h3>
+                    <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.2em]">Instant Math</p>
                   </div>
-                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
-                    <Users className="h-6 w-6 text-blue-400 mx-auto mb-3" />
-                    <h3 className="text-slate-200 font-semibold text-sm">Owner Identity</h3>
-                    <p className="text-[10px] text-slate-500 uppercase mt-1">Distress Signals</p>
+                  <div className="bg-black border border-slate-900 rounded-[2rem] p-8 w-64 transition-all hover:bg-slate-950 hover:border-blue-500/30">
+                    <Users className="h-8 w-8 text-blue-500 mb-4" />
+                    <h3 className="text-white font-bold text-base mb-1">Owner Identity</h3>
+                    <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.2em]">Distress Signals</p>
                   </div>
-                  <div className="glass-card rounded-2xl p-5 w-48 border border-slate-700/20">
-                    <Target className="h-6 w-6 text-purple-400 mx-auto mb-3" />
-                    <h3 className="text-slate-200 font-semibold text-sm">Lead Pipeline</h3>
-                    <p className="text-[10px] text-slate-500 uppercase mt-1">One-Click Claim</p>
+                  <div className="bg-black border border-slate-900 rounded-[2rem] p-8 w-64 transition-all hover:bg-slate-950 hover:border-purple-500/30">
+                    <Target className="h-8 w-8 text-purple-500 mb-4" />
+                    <h3 className="text-white font-bold text-base mb-1">Lead Pipeline</h3>
+                    <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.2em]">One-Click Claim</p>
                   </div>
                 </div>
               </div>

@@ -26,26 +26,26 @@
 }
 
 .dark {
-  --background: hsl(222, 84%, 4.9%);
-  --foreground: hsl(210, 40%, 98%);
-  --muted: hsl(217, 32.6%, 17.5%);
-  --muted-foreground: hsl(215, 20.2%, 65.1%);
-  --popover: hsl(222, 84%, 4.9%);
-  --popover-foreground: hsl(210, 40%, 98%);
-  --card: hsl(222, 84%, 4.9%);
-  --card-foreground: hsl(210, 40%, 98%);
-  --border: hsl(217, 32.6%, 17.5%);
-  --input: hsl(217, 32.6%, 17.5%);
-  --primary: hsl(217, 91%, 60%);
-  --primary-foreground: hsl(222, 47%, 11%);
-  --secondary: hsl(217, 32.6%, 17.5%);
-  --secondary-foreground: hsl(210, 40%, 98%);
-  --accent: hsl(217, 32.6%, 17.5%);
-  --accent-foreground: hsl(210, 40%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(210, 40%, 98%);
-  --ring: hsl(217, 91%, 60%);
-  --radius: 0.5rem;
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(0, 0%, 8%);
+  --muted-foreground: hsl(0, 0%, 60%);
+  --popover: hsl(0, 0%, 0%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(0, 0%, 3%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(0, 0%, 12%);
+  --input: hsl(0, 0%, 10%);
+  --primary: hsl(142, 69%, 58%);
+  --primary-foreground: hsl(144, 40%, 4%);
+  --secondary: hsl(0, 0%, 8%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(0, 0%, 15%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(142, 69%, 58%);
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -142,30 +142,23 @@
 }
 
 .sidebar-bg {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(148, 163, 184, 0.1);
+  background: hsl(0, 0%, 3%);
+  border-right: 1px solid hsl(0, 0%, 15%);
 }
 
 .card-bg {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  background: hsl(0, 0%, 4%);
+  border: 1px solid hsl(0, 0%, 12%);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(148, 163, 184, 0.08);
+  background: hsl(0, 0%, 5%);
+  border: 1px solid hsl(0, 0%, 13%);
 }
 
 .premium-card {
-  background: linear-gradient(135deg, 
-    rgba(15, 23, 42, 0.8) 0%, 
-    rgba(30, 41, 59, 0.6) 100%
-  );
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: hsl(0, 0%, 2%);
+  border: 1px solid var(--primary);
 }
 
 /* Enhanced futuristic glass effects */
@@ -455,17 +448,10 @@
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #3b82f6, #10b981, #8b5cf6);
+  background: linear-gradient(to right, #ffffff, #888888);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
 }
 
 /* Modern input styling */

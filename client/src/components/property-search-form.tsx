@@ -312,29 +312,29 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
   }, []);
 
   return (
-    <Card className="premium-card rounded-3xl shadow-2xl overflow-hidden">
+    <Card className="bg-[#050505] border-slate-900 rounded-[2rem] shadow-2xl overflow-hidden border-[0.5px]">
       {/* Header Section */}
-      <CardHeader className="text-center pb-8 bg-gradient-to-br from-slate-900/50 to-slate-800/30">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl mb-4 mx-auto float-animation">
-          <Search className="h-8 w-8 text-white" />
+      <CardHeader className="text-center py-12 border-b border-slate-900 bg-black">
+        <div className="inline-flex items-center justify-center w-14 h-14 bg-emerald-500 rounded-2xl mb-6 mx-auto">
+          <Search className="h-6 w-6 text-black" />
         </div>
-        <CardTitle className="text-4xl font-bold text-gradient mb-3">
+        <CardTitle className="text-4xl font-black text-white mb-2 tracking-tight">
           Property Intelligence Engine
         </CardTitle>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-4">
+        <p className="text-slate-500 text-sm max-w-xl mx-auto mb-6 font-medium">
           Powered by authentic MLS data with smart address autocomplete
         </p>
-        <div className="flex justify-center gap-6 text-sm text-slate-300">
+        <div className="flex justify-center gap-6 text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em]">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-emerald-400" />
+            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
             <span>Smart Autocomplete</span>
           </div>
           <div className="flex items-center gap-2">
-            <Target className="h-4 w-4 text-blue-400" />
+            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
             <span>Real MLS Data</span>
           </div>
           <div className="flex items-center gap-2">
-            <Settings className="h-4 w-4 text-purple-400" />
+            <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
             <span>Market Analysis</span>
           </div>
         </div>
@@ -365,7 +365,7 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
                     handleAddressChange(e.target.value);
                   }}
                   placeholder="Start typing an address..."
-                  className="modern-input h-14 text-slate-200 placeholder-slate-400 rounded-xl pr-10 text-lg"
+                  className="bg-black border-slate-900 h-14 text-white placeholder-slate-700 rounded-xl pr-10 text-lg focus-visible:ring-1 focus-visible:ring-emerald-500/30"
                   autoComplete="off"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
@@ -499,11 +499,11 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
           </Collapsible>
           
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 pt-6">
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-8">
             <Button
               type="submit"
               disabled={searchMutation.isPending}
-              className="flex-1 btn-primary-gradient text-white font-bold py-4 px-8 rounded-xl h-14 text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="flex-1 bg-emerald-500 hover:bg-emerald-400 text-black font-black py-4 px-8 rounded-xl h-14 text-lg transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.3)] border-none"
               data-tour="search-button"
             >
               <Search className="mr-3 h-5 w-5" />
@@ -512,8 +512,8 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
             <Button
               type="button"
               onClick={handleClear}
-              variant="outline"
-              className="btn-secondary-gradient text-slate-300 font-medium py-4 px-6 rounded-xl h-14 transition-all duration-300 border-slate-600"
+              variant="ghost"
+              className="text-slate-600 font-bold py-4 px-6 rounded-xl h-14 transition-all duration-300 border border-slate-900 hover:text-white hover:bg-slate-900"
             >
               <X className="mr-2 h-4 w-4" />
               Clear

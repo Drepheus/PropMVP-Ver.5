@@ -227,7 +227,7 @@ export default function LeadManagement() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Navigation Bar */}
       <NavigationBar onMenuClick={() => setSidebarOpen(true)} />
       
@@ -251,21 +251,21 @@ export default function LeadManagement() {
         </div>
         
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-gradient mb-4">Lead Management Center</h1>
-          <p className="text-slate-400 text-xl max-w-3xl mx-auto">
+        <div className="text-center py-12">
+          <h1 className="text-6xl font-black text-white mb-4 tracking-tighter">LEAD MANAGEMENT</h1>
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
             Comprehensive lead tracking, pipeline management, and conversion optimization for wholesale operations
           </p>
-          <div className="flex justify-center gap-4 mt-6">
-            <Button variant="outline" className="glass-card">
+          <div className="flex justify-center gap-4 mt-10">
+            <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
               <Plus className="h-4 w-4 mr-2" />
               Add Lead
             </Button>
-            <Button variant="outline" className="glass-card">
+            <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
               <Filter className="h-4 w-4 mr-2" />
               Filter Leads
             </Button>
-            <Button variant="outline" className="glass-card">
+            <Button variant="ghost" className="border border-slate-900 text-slate-400 hover:text-white hover:bg-slate-900 rounded-xl px-6 h-11">
               <Download className="h-4 w-4 mr-2" />
               Export Data
             </Button>
@@ -280,7 +280,7 @@ export default function LeadManagement() {
           defaultExpanded={true}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -297,7 +297,7 @@ export default function LeadManagement() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -314,7 +314,7 @@ export default function LeadManagement() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -331,7 +331,7 @@ export default function LeadManagement() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -348,7 +348,7 @@ export default function LeadManagement() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -365,7 +365,7 @@ export default function LeadManagement() {
             </CardContent>
           </Card>
 
-          <Card className="floating-card rounded-2xl overflow-hidden">
+          <Card className="bg-[#050505] border-slate-900 rounded-2xl overflow-hidden shadow-xl border-[0.5px]">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -452,15 +452,15 @@ export default function LeadManagement() {
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-slate-800/50">
+                    <thead className="bg-black">
                       <tr>
-                        <th className="px-6 py-4 text-left text-slate-300 font-medium">Property & Owner</th>
-                        <th className="px-6 py-4 text-left text-slate-300 font-medium">Contact Info</th>
-                        <th className="px-6 py-4 text-center text-slate-300 font-medium">Status</th>
-                        <th className="px-6 py-4 text-center text-slate-300 font-medium">Priority</th>
-                        <th className="px-6 py-4 text-right text-slate-300 font-medium">Value/Equity</th>
-                        <th className="px-6 py-4 text-left text-slate-300 font-medium">Next Action</th>
-                        <th className="px-6 py-4 text-center text-slate-300 font-medium">Actions</th>
+                        <th className="px-6 py-4 text-left text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Property & Owner</th>
+                        <th className="px-6 py-4 text-left text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Contact Info</th>
+                        <th className="px-6 py-4 text-center text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Status</th>
+                        <th className="px-6 py-4 text-center text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Priority</th>
+                        <th className="px-6 py-4 text-right text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Value/Equity</th>
+                        <th className="px-6 py-4 text-left text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Next Action</th>
+                        <th className="px-6 py-4 text-center text-slate-500 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
