@@ -161,9 +161,10 @@ export function setupOAuth(app: Express) {
 
   // Development admin bypass route
   app.post("/api/auth/admin-bypass", async (req, res) => {
-    if (process.env.NODE_ENV !== "development") {
-      return res.status(403).json({ message: "Admin bypass only available in development" });
-    }
+    // Disabled for MVP testing on Vercel
+    // if (process.env.NODE_ENV === "production") {
+    //   return res.status(403).json({ message: "Admin bypass only available in development" });
+    // }
 
     try {
       // Create or get admin user

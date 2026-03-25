@@ -55,10 +55,11 @@ export default function AuthModal({ children }: AuthModalProps) {
         },
         credentials: "include",
       });
-      
       if (response.ok) {
         window.location.reload();
       } else {
+        const errorData = await response.json().catch(() => ({}));
+        setError(errorData.message || "Admin bypass failed or is disabled");
         console.error("Admin bypass failed");
       }
     } catch (error) {
