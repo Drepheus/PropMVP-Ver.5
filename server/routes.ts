@@ -8,16 +8,27 @@ import { z } from "zod";
 import { analyzePropertyWithAI } from "./ai-analysis";
 import { setupOAuth, requireAuth } from "./auth";
 
+import memoryStore from "memorystore";
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Session configuration
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
-  const pgStore = connectPg(session);
-  const sessionStore = new pgStore({
-    conString: process.env.DATABASE_URL,
-    createTableIfMissing: true,
-    ttl: sessionTtl,
-    tableName: "sessions",
-  });
+  
+  let sessionStore;
+  if (process.env.DATABASE_URL) {
+    const pgStore = connectPg(session);
+    sessionStore = new pgStore({
+      conString: process.env.DATABASE_URL,
+      createTableIfMissing: true,
+      ttl: sessionTtl,
+      tableName: "sessions",
+    });
+  } else {
+    const MemoryStore = memoryStore(session);
+    sessionStore = new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    });
+  }
 
   app.use(session({
     secret: process.env.SESSION_SECRET || 'dev-secret-key-change-in-production',

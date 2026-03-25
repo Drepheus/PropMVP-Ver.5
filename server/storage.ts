@@ -20,17 +20,17 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   // User operations for Replit Auth
   async getUser(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
+    const [user] = await db!.select().from(users).where(eq(users.id, id));
     return user;
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
+    const [user] = await db!.select().from(users).where(eq(users.email, email));
     return user;
   }
 
   async upsertUser(userData: UpsertUser): Promise<User> {
-    const [user] = await db
+    const [user] = await db!
       .insert(users)
       .values({
         ...userData,
@@ -50,7 +50,7 @@ export class DatabaseStorage implements IStorage {
   async createLocalUser(userData: { email: string; passwordHash: string; firstName?: string | null; lastName?: string | null }): Promise<User> {
     const userId = `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    const [user] = await db
+    const [user] = await db!
       .insert(users)
       .values({
         id: userId,
@@ -67,11 +67,11 @@ export class DatabaseStorage implements IStorage {
 
   // Property operations
   async getPropertyById(id: number): Promise<PropertyWithDetails | null> {
-    const [property] = await db.select().from(properties).where(eq(properties.id, id));
+    const [property] = await db!.select().from(properties).where(eq(properties.id, id));
     if (!property) return null;
 
-    const propertyComparables = await db.select().from(comparableSales).where(eq(comparableSales.propertyId, id));
-    const [propertyMetrics] = await db.select().from(marketMetrics).where(eq(marketMetrics.propertyId, id));
+    const propertyComparables = await db!.select().from(comparableSales).where(eq(comparableSales.propertyId, id));
+    const [propertyMetrics] = await db!.select().from(marketMetrics).where(eq(marketMetrics.propertyId, id));
 
     return {
       ...property,
@@ -82,7 +82,7 @@ export class DatabaseStorage implements IStorage {
 
   async searchProperty(searchData: PropertySearch): Promise<PropertyWithDetails | null> {
     // Try to find existing property by address
-    const [existingProperty] = await db.select().from(properties).where(
+    const [existingProperty] = await db!.select().from(properties).where(
       eq(properties.address, searchData.address)
     );
 
@@ -95,13 +95,13 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllProperties(): Promise<PropertyWithDetails[]> {
-    const allProperties = await db.select().from(properties);
+    const allProperties = await db!.select().from(properties);
     
     const result = await Promise.all(
       allProperties.map(async (property) => {
         const [comps, metrics] = await Promise.all([
-          db.select().from(comparableSales).where(eq(comparableSales.propertyId, property.id)),
-          db.select().from(marketMetrics).where(eq(marketMetrics.propertyId, property.id))
+          db!.select().from(comparableSales).where(eq(comparableSales.propertyId, property.id)),
+          db!.select().from(marketMetrics).where(eq(marketMetrics.propertyId, property.id))
         ]);
         
         return {
@@ -237,7 +237,7 @@ export class DatabaseStorage implements IStorage {
       );
 
       // Insert authentic property data into database
-      const [property] = await db
+      const [property] = await db!
         .insert(properties)
         .values({
           address: propertyDetailsFromAPI.address,
@@ -312,7 +312,7 @@ export class DatabaseStorage implements IStorage {
         address: propertyData.address,
         city: propertyData.city,
         state: propertyData.state,
-        zipCode: propertyData.zipCode,
+        zipCode: propertyData.zipCode || "",
         beds: 3,
         baths: "2.0",
         sqft: 1800,
@@ -344,4 +344,98 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+export class MemStorage implements IStorage {
+  private users: Map<string, User> = new Map();
+  private properties: Map<number, PropertyWithDetails> = new Map();
+  private propertyIdCounter = 1;
+
+  async getUser(id: string): Promise<User | undefined> {
+    return this.users.get(id);
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(u => u.email === email);
+  }
+
+  async upsertUser(userData: UpsertUser): Promise<User> {
+    const id = userData.id || `user_${Date.now()}`;
+    const user: User = {
+      ...userData,
+      id,
+      email: userData.email || null,
+      authProvider: id.startsWith('google_') ? 'google' : 'local',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      passwordHash: userData.passwordHash || null,
+      firstName: userData.firstName || null,
+      lastName: userData.lastName || null,
+      profileImageUrl: userData.profileImageUrl || null,
+    };
+    this.users.set(id, user);
+    return user;
+  }
+
+  async createLocalUser(userData: { email: string; passwordHash: string; firstName?: string | null; lastName?: string | null }): Promise<User> {
+    const id = `local_${Date.now()}`;
+    const user: User = {
+      id,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      firstName: userData.firstName || null,
+      lastName: userData.lastName || null,
+      authProvider: 'local',
+      profileImageUrl: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.users.set(id, user);
+    return user;
+  }
+
+  async getPropertyById(id: number): Promise<PropertyWithDetails | null> {
+    return this.properties.get(id) || null;
+  }
+
+  async searchProperty(searchData: PropertySearch): Promise<PropertyWithDetails | null> {
+    const existing = Array.from(this.properties.values()).find(p => p.address === searchData.address);
+    if (existing) return existing;
+    return this.createProperty(searchData);
+  }
+
+  async createProperty(propertyData: PropertySearch): Promise<PropertyWithDetails> {
+    const id = this.propertyIdCounter++;
+    const property: PropertyWithDetails = {
+      id,
+      createdAt: new Date(),
+      address: propertyData.address,
+      city: propertyData.city,
+      state: propertyData.state,
+      zipCode: propertyData.zipCode || "",
+      beds: 3,
+      baths: "2",
+      sqft: 1500,
+      yearBuilt: 2000,
+      propertyType: "Single Family",
+      lotSize: "0.25",
+      parking: "2 spaces",
+      hasPool: false,
+      hoaFees: "0",
+      listPrice: "500000",
+      listingStatus: "Active",
+      daysOnMarket: 10,
+      pricePerSqft: "333",
+      lastSalePrice: "450000",
+      lastSaleDate: "2022-01-01",
+      comparables: [],
+      marketMetrics: null,
+    };
+    this.properties.set(id, property);
+    return property;
+  }
+
+  async getAllProperties(): Promise<PropertyWithDetails[]> {
+    return Array.from(this.properties.values());
+  }
+}
+
+export const storage = db ? new DatabaseStorage() : new MemStorage();
