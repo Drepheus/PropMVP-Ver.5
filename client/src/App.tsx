@@ -1,5 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -28,12 +28,13 @@ function Router() {
     toggleMiniWorkflow 
   } = useMiniWorkflow();
 
-  // Show welcome modal once per session when user becomes authenticated
+  // Show welcome modal every time user transitions from logged-out to logged-in
+  const wasAuthenticated = useRef(false);
   useEffect(() => {
-    if (isAuthenticated && !sessionStorage.getItem("propanalyzed_welcomed")) {
+    if (isAuthenticated && !wasAuthenticated.current) {
       setShowWelcome(true);
-      sessionStorage.setItem("propanalyzed_welcomed", "true");
     }
+    wasAuthenticated.current = isAuthenticated;
   }, [isAuthenticated]);
 
   // Determine current step based on route
