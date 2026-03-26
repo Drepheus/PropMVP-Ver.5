@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
-import { propertySearchSchema } from "@shared/schema";
+import { propertySearchSchema } from "../shared/schema";
 import { z } from "zod";
 import { analyzePropertyWithAI } from "./ai-analysis";
 import { setupOAuth, requireAuth } from "./auth";

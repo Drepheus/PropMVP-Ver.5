@@ -1,4 +1,4 @@
-import { PropertySearch, PropertyWithDetails } from "@shared/schema";
+import { PropertySearch, PropertyWithDetails } from "../shared/schema";
 
 // Enhanced Rentcast API interfaces to capture more comprehensive data
 interface RentcastPropertyDetails {

@@ -1,4 +1,4 @@
-import { properties, comparableSales, marketMetrics, users, leads, type Property, type ComparableSale, type MarketMetrics, type PropertyWithDetails, type PropertySearch, type User, type UpsertUser, type Lead } from "@shared/schema";
+import { properties, comparableSales, marketMetrics, users, leads, type Property, type ComparableSale, type MarketMetrics, type PropertyWithDetails, type PropertySearch, type User, type UpsertUser, type Lead } from "../shared/schema";
 import { db } from "./db";
 import { eq, and } from "drizzle-orm";
 import { rentcastService } from "./rentcast-service";
