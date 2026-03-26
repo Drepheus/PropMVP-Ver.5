@@ -14,9 +14,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   
   const menuItems = [
-    { icon: TrendingUp, label: "Market Intelligence", path: "/", active: location === "/" },
     { icon: Search, label: "Property Search", path: "/property-search", active: location === "/property-search" },
     { icon: BarChart3, label: "Analytics Dashboard", path: "/analytics", active: location === "/analytics" },
+    { icon: TrendingUp, label: "Market Intelligence", path: "/", active: location === "/" },
     { icon: Users, label: "Lead Management", path: "/lead-management", active: location === "/lead-management" },
     { icon: FileText, label: "Export Reports", path: "/reports", active: false },
   ];
