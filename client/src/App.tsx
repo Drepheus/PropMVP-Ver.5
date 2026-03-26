@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/hooks/useAuth";
 import MiniWorkflowAssistant from "@/components/mini-workflow-assistant";
+import WelcomeModal from "@/components/welcome-modal";
 import { useMiniWorkflow } from "@/hooks/useMiniWorkflow";
 import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
@@ -19,12 +20,21 @@ import NotFound from "@/pages/not-found";
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
   const [location] = useLocation();
+  const [showWelcome, setShowWelcome] = useState(false);
   const { 
     miniWorkflowEnabled, 
     workflowState, 
     updateWorkflowState, 
     toggleMiniWorkflow 
   } = useMiniWorkflow();
+
+  // Show welcome modal once per session when user becomes authenticated
+  useEffect(() => {
+    if (isAuthenticated && !sessionStorage.getItem("propanalyzed_welcomed")) {
+      setShowWelcome(true);
+      sessionStorage.setItem("propanalyzed_welcomed", "true");
+    }
+  }, [isAuthenticated]);
 
   // Determine current step based on route
   const getCurrentStep = () => {
@@ -40,8 +50,8 @@ function Router() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+          <p className="mt-4 text-slate-500 text-sm font-bold uppercase tracking-widest">Initializing Engine...</p>
         </div>
       </div>
     );
@@ -49,6 +59,11 @@ function Router() {
 
   return (
     <>
+      {/* Welcome Modal */}
+      {isAuthenticated && (
+        <WelcomeModal open={showWelcome} onClose={() => setShowWelcome(false)} />
+      )}
+
       <Switch>
         {!isAuthenticated ? (
           <Route path="/" component={Landing} />
