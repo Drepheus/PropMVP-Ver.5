@@ -163,7 +163,7 @@ export default function PropertyTriageView({ property, onSearchAgain, onDeepDive
           <div className="flex items-center gap-4">
             {onDeepDive && (
               <Button onClick={onDeepDive} variant="outline" size="sm" className="bg-slate-900 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 h-9 font-bold">
-                Full Deep-Dive
+                Command Center
               </Button>
             )}
             {/* Source Attribution Badge */}
