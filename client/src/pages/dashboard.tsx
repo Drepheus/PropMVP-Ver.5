@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Sidebar from "@/components/sidebar";
 import NavigationBar from "@/components/navigation-bar";
 import PropertySearchForm from "@/components/property-search-form";
@@ -48,6 +48,7 @@ export default function Dashboard() {
   const [location, setLocation] = useLocation();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const { toast } = useToast();
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   // ARV and Deal Analysis state
   const [arvEstimate, setArvEstimate] = useState(0);
@@ -72,7 +73,7 @@ export default function Dashboard() {
         variant: "destructive",
       });
       setTimeout(() => {
-        window.location.href = "/api/login";
+        window.location.href = "/";
       }, 500);
       return;
     }
@@ -85,6 +86,10 @@ export default function Dashboard() {
 
   const handlePropertySelect = (property: PropertyWithDetails) => {
     setSelectedProperty(property);
+    // Scroll to results after a brief delay to let the DOM render
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
   };
 
   const handleLoadingChange = (loading: boolean) => {
@@ -549,7 +554,7 @@ export default function Dashboard() {
           )}
 
           {selectedProperty && !isLoading && (
-            <div className="space-y-8 animate-in fade-in duration-700">
+            <div ref={resultsRef} className="space-y-8 animate-in fade-in duration-700">
               <Tabs defaultValue="triage" className="w-full">
                 <div className="flex justify-between items-center mb-6">
                   <TabsList className="bg-slate-900/50 border border-slate-700/50 p-1 rounded-xl">
