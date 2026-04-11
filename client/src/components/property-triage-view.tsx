@@ -36,9 +36,13 @@ import ClaimDealModal from "./claim-deal-modal";
 interface PropertyTriageViewProps {
   property: PropertyWithDetails;
   onSearchAgain?: () => void;
+  onDeepDive?: () => void;
+  arv?: number;
+  mao?: number;
+  profit?: number;
 }
 
-export default function PropertyTriageView({ property, onSearchAgain }: PropertyTriageViewProps) {
+export default function PropertyTriageView({ property, onSearchAgain, onDeepDive, arv = 0, mao = 0, profit = 0 }: PropertyTriageViewProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [location, setLocation] = useLocation();
@@ -64,7 +68,7 @@ export default function PropertyTriageView({ property, onSearchAgain }: Property
       if (e.key === "c" && !e.ctrlKey && !e.metaKey && !(e.target instanceof HTMLInputElement) && !(e.target instanceof HTMLTextAreaElement)) {
         if (!property.currentLead && !isKilled) {
           e.preventDefault();
-          setShowClaimModal(true);
+          claimMutation.mutate();
         }
       }
       // K to kill
@@ -157,6 +161,11 @@ export default function PropertyTriageView({ property, onSearchAgain }: Property
             </div>
           </div>
           <div className="flex items-center gap-4">
+            {onDeepDive && (
+              <Button onClick={onDeepDive} variant="outline" size="sm" className="bg-slate-900 border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 h-9 font-bold">
+                Full Deep-Dive
+              </Button>
+            )}
             {/* Source Attribution Badge */}
             <Badge className="bg-slate-900 text-slate-400 border border-slate-800 px-3 py-1.5 gap-1.5 rounded-full text-[10px] font-bold">
               <Tag className="h-3 w-3" />
@@ -166,7 +175,7 @@ export default function PropertyTriageView({ property, onSearchAgain }: Property
               <span>Analyzed</span>
               <ChevronDown className="h-3 w-3" />
             </div>
-            <Button variant="ghost" size="sm" className="text-slate-300 gap-2 border border-slate-800 hover:bg-slate-900 h-9">
+            <Button variant="ghost" size="sm" className="text-slate-300 gap-2 border border-slate-800 hover:bg-slate-900 h-9" onClick={onSearchAgain}>
               <RefreshCw className="h-3.5 w-3.5" />
               Re-analyze
             </Button>
@@ -239,35 +248,47 @@ export default function PropertyTriageView({ property, onSearchAgain }: Property
               </div>
               
               <div className="hidden lg:flex flex-col items-center justify-center border-l border-slate-900 pl-12 row-span-2">
-                 <div className="w-16 h-16 bg-slate-950 rounded-2xl flex items-center justify-center mb-4 border border-slate-900">
-                   <RefreshCw className="h-7 w-7 text-slate-800" />
+                 <div className="w-20 h-20 bg-slate-950 rounded-full flex flex-col items-center justify-center mb-2 border-4 border-slate-900 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                   <span className="text-3xl font-black text-emerald-400 leading-none">8</span>
+                   <span className="text-[10px] text-slate-500 font-bold uppercase">SCORE</span>
                  </div>
-                 <span className="text-[9px] text-slate-600 font-black uppercase tracking-[0.2em] text-center max-w-[80px]">Street View coming soon</span>
               </div>
 
               <div className="space-y-2">
                 <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]">Est. Value</div>
-                <div className="text-3xl font-bold tracking-tight text-white">${parseFloat(property.estimatedValue || "0").toLocaleString()}</div>
+                <div className="text-2xl font-bold tracking-tight text-white">${parseFloat(property.estimatedValue || "0").toLocaleString()}</div>
               </div>
               <div className="space-y-2">
                 <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5">
                   Mortgage <Flag className="h-3 w-3 text-slate-800" />
                 </div>
-                <div className="text-3xl font-bold tracking-tight text-white">$255,000</div>
+                <div className="text-2xl font-bold tracking-tight text-white">$255,000</div>
               </div>
               <div className="space-y-2">
                 <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5">
-                  Equity <Flag className="h-3 w-3 text-slate-800" />
+                  Equity ({equityPercent}%)
                 </div>
-                <div className={`text-3xl font-bold tracking-tight ${isHotLead ? "text-emerald-400" : "text-white"}`}>
+                <div className={`text-2xl font-bold tracking-tight ${isHotLead ? "text-emerald-400" : "text-white"}`}>
                   ${parseFloat(property.equity || "0").toLocaleString()}
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5">
-                  Deal Score <Flag className="h-3 w-3 text-slate-800" />
+                  ARV <TrendingUp className="h-3 w-3 text-emerald-500/50" />
                 </div>
-                <div className="text-3xl font-bold tracking-tight text-emerald-400">8<span className="text-slate-700 text-lg">/10</span></div>
+                <div className="text-2xl font-bold tracking-tight text-blue-400">${arv.toLocaleString()}</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5">
+                  MAO <Target className="h-3 w-3 text-slate-800" />
+                </div>
+                <div className="text-2xl font-bold tracking-tight text-indigo-400">${mao.toLocaleString()}</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-1.5">
+                  Projected Profit
+                </div>
+                <div className="text-2xl font-bold tracking-tight text-emerald-500">${profit.toLocaleString()}</div>
               </div>
             </div>
           </CardContent>
@@ -278,11 +299,12 @@ export default function PropertyTriageView({ property, onSearchAgain }: Property
           <div className="sticky bottom-6 z-20 flex justify-center">
             <div className="bg-[#050505]/95 backdrop-blur-xl border border-slate-800 rounded-2xl p-3 flex items-center gap-3 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)]">
               <Button
-                onClick={() => setShowClaimModal(true)}
+                onClick={() => claimMutation.mutate()}
+                disabled={claimMutation.isPending}
                 className="bg-emerald-500 hover:bg-emerald-400 text-black font-black px-8 py-6 rounded-xl text-sm transition-all shadow-[0_8px_20px_-8px_rgba(16,185,129,0.4)] group"
               >
                 <Zap className="mr-2 h-4 w-4" />
-                CLAIM DEAL
+                {claimMutation.isPending ? "CLAIMING..." : "CLAIM DEAL"}
                 <kbd className="ml-3 text-[9px] bg-black/20 px-1.5 py-0.5 rounded font-mono">C</kbd>
               </Button>
 

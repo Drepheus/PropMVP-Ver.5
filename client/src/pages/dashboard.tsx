@@ -38,7 +38,7 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import PropertyTriageView from "@/components/property-triage-view";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,6 +49,7 @@ export default function Dashboard() {
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const { toast } = useToast();
   const resultsRef = useRef<HTMLDivElement>(null);
+  const [deepDiveOpen, setDeepDiveOpen] = useState(false);
 
   // ARV and Deal Analysis state
   const [arvEstimate, setArvEstimate] = useState(0);
@@ -551,105 +552,94 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-          )}
-
-          {selectedProperty && !isLoading && (
+                  {selectedProperty && !isLoading && (
             <div ref={resultsRef} className="space-y-8 animate-in fade-in duration-700">
-              <Tabs defaultValue="triage" className="w-full">
-                <div className="flex justify-between items-center mb-6">
-                  <TabsList className="bg-slate-900/50 border border-slate-700/50 p-1 rounded-xl">
-                    <TabsTrigger value="triage" className="rounded-lg data-[state=active]:bg-emerald-500 data-[state=active]:text-slate-950 px-6 py-2 font-bold transition-all">
-                      <Zap className="h-4 w-4 mr-2" />
-                      TRIAGE VIEW
-                    </TabsTrigger>
-                    <TabsTrigger value="assess" className="rounded-lg data-[state=active]:bg-blue-500 data-[state=active]:text-white px-6 py-2 font-bold transition-all">
-                      <BarChart3 className="h-4 w-4 mr-2" />
-                      FULL ANALYSIS
-                    </TabsTrigger>
-                  </TabsList>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className="flex flex-col items-end">
-                      <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Active Search</span>
-                      <span className="text-sm font-bold text-slate-200">{selectedProperty.address}</span>
+              {/* Triage View — full screen, clean, 60-second decision */}
+              <PropertyTriageView 
+                property={selectedProperty} 
+                onSearchAgain={() => setSelectedProperty(null)}
+                onDeepDive={() => setDeepDiveOpen(true)}
+              />
+
+              {/* Full Deep-Dive Analysis — right-side Sheet drawer */}
+              <Sheet open={deepDiveOpen} onOpenChange={setDeepDiveOpen}>
+                <SheetContent side="right" className="w-full sm:max-w-2xl lg:max-w-3xl bg-black border-slate-800 overflow-y-auto p-0">
+                  <SheetHeader className="px-8 pt-8 pb-4 border-b border-slate-900">
+                    <SheetTitle className="text-2xl font-black text-white tracking-tight flex items-center gap-3">
+                      <div className="p-2 bg-blue-500/20 rounded-xl">
+                        <BarChart3 className="h-5 w-5 text-blue-400" />
+                      </div>
+                      Full Deep-Dive Analysis
+                    </SheetTitle>
+                    <p className="text-sm text-slate-500">{selectedProperty.address}, {selectedProperty.city}, {selectedProperty.state}</p>
+                  </SheetHeader>
+
+                  <div className="p-8 space-y-8">
+                    {/* ARV Analysis */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      <Card className="bg-[#050505] border border-slate-900 rounded-[1.5rem] shadow-lg">
+                        <CardHeader className="bg-blue-500/5 pb-4">
+                          <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
+                            <TrendingUp className="h-5 w-5 text-blue-400" />
+                            ARV Analysis
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="pt-4">
+                          <Input 
+                            type="number"
+                            placeholder="Adjust ARV estimate"
+                            value={arvEstimate || ''}
+                            onChange={(e) => setArvEstimate(Number(e.target.value))}
+                            className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
+                          />
+                          <div className="text-3xl font-black text-emerald-400">${(arvEstimate || 0).toLocaleString()}</div>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="bg-[#050505] border border-slate-900 rounded-[1.5rem] shadow-lg">
+                        <CardHeader className="bg-amber-500/5 pb-4">
+                          <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
+                            <Home className="h-5 w-5 text-amber-400" />
+                            Repair Costs
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="pt-4">
+                          <Input 
+                            type="number"
+                            placeholder="Estimate repairs"
+                            value={repairCosts || ''}
+                            onChange={(e) => setRepairCosts(Number(e.target.value))}
+                            className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
+                          />
+                          <div className="text-3xl font-black text-amber-400">${(repairCosts || 0).toLocaleString()}</div>
+                        </CardContent>
+                      </Card>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => setSelectedProperty(null)} className="h-10 w-10 text-slate-400 hover:text-white">
-                      <X className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
 
-                <TabsContent value="triage" className="mt-0">
-                  <PropertyTriageView property={selectedProperty} />
-                </TabsContent>
-
-                <TabsContent value="assess" className="mt-0 space-y-8">
-                  {/* Existing Assessment UI - Repair/MAO Calculators */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    {/* Simplified ARV Card */}
-                    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg border-slate-700/50">
-                      <CardHeader className="bg-blue-500/5 pb-4">
-                        <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
-                          <TrendingUp className="h-5 w-5 text-blue-400" />
-                          ARV Analysis
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-4">
-                        <Input 
-                          type="number"
-                          placeholder="Adjust ARV estimate"
-                          value={arvEstimate || ''}
-                          onChange={(e) => setArvEstimate(Number(e.target.value))}
-                          className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
-                        />
-                        <div className="text-3xl font-black text-emerald-400">${(arvEstimate || 0).toLocaleString()}</div>
-                      </CardContent>
+                    {/* MAO Summary */}
+                    <Card className="bg-[#050505] border border-slate-900 rounded-[1.5rem] p-6">
+                      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div className="space-y-1">
+                          <h3 className="text-slate-400 uppercase text-xs font-black tracking-widest">Recommended Max Offer</h3>
+                          <div className="text-5xl font-black text-white tracking-tighter">${calculatedMAO.toLocaleString()}</div>
+                          <p className="text-slate-500 text-sm">Based on 70% rule: ({arvEstimate} × 0.7) - {repairCosts} - {wholesaleFee}</p>
+                        </div>
+                        <div className="flex gap-4">
+                           <Button 
+                             className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-6 h-auto"
+                             onClick={() => setLocation("/make-offer")}
+                           >
+                             <Target className="mr-2 h-5 w-5" />
+                             GENERATE OFFER
+                           </Button>
+                        </div>
+                      </div>
                     </Card>
 
-                    {/* Simplified Repair Card */}
-                    <Card className="bg-black border border-slate-900 rounded-[1.5rem] shadow-lg border-slate-700/50">
-                      <CardHeader className="bg-amber-500/5 pb-4">
-                        <CardTitle className="text-lg text-slate-200 flex items-center gap-2">
-                          <Home className="h-5 w-5 text-amber-400" />
-                          Repair Costs
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pt-4">
-                        <Input 
-                          type="number"
-                          placeholder="Estimate repairs"
-                          value={repairCosts || ''}
-                          onChange={(e) => setRepairCosts(Number(e.target.value))}
-                          className="bg-slate-800/50 border-slate-700 text-slate-100 mb-4"
-                        />
-                        <div className="text-3xl font-black text-amber-400">${(repairCosts || 0).toLocaleString()}</div>
-                      </CardContent>
-                    </Card>
+                    <PropertyDashboard property={selectedProperty} />
                   </div>
-                  
-                  {/* MAO Summary */}
-                  <Card className="bg-black border border-slate-900 rounded-[1.5rem] border-slate-700/40 bg-black border-b border-slate-900 p-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                      <div className="space-y-1">
-                        <h3 className="text-slate-400 uppercase text-xs font-black tracking-widest">Recommended Max Offer</h3>
-                        <div className="text-5xl font-black text-white tracking-tighter">${calculatedMAO.toLocaleString()}</div>
-                        <p className="text-slate-500 text-sm">Based on 70% rule: ({arvEstimate} × 0.7) - {repairCosts} - {wholesaleFee}</p>
-                      </div>
-                      <div className="flex gap-4">
-                         <Button 
-                            className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-6 h-auto"
-                            onClick={() => setLocation("/make-offer")}
-                         >
-                            <Target className="mr-2 h-5 w-5" />
-                            GENERATE OFFER
-                         </Button>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <PropertyDashboard property={selectedProperty} />
-                </TabsContent>
-              </Tabs>
+                </SheetContent>
+              </Sheet>
             </div>
           )}
         </div>
