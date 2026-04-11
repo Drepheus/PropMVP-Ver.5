@@ -63,6 +63,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
            return res.status(404).json({ message: "Failed to create mock property" });
         }
         
+        // If property was pre-seeded with rich data (e.g. mock seed), return as-is
+        if (property.comparables && property.comparables.length > 0) {
+          console.log("Admin Bypass: Returning pre-seeded rich property data");
+          return res.json(property);
+        }
+        
         // Force the property to have fully populated intelligence features
         property = {
           ...property,

@@ -444,6 +444,238 @@ export class MemStorage implements IStorage {
   private users: Map<string, User> = new Map();
   private properties: Map<number, PropertyWithDetails> = new Map();
   private propertyIdCounter = 1;
+  private leads: Map<number, Lead> = new Map();
+  private leadIdCounter = 1;
+
+  constructor() {
+    this.seedMockProperties();
+  }
+
+  /** Pre-populate 3 rich mock properties + 1 claimed lead for local dev testing */
+  private seedMockProperties() {
+    console.log('[MockSeed] Seeding 3 test properties for local dev mode...');
+
+    // Seed the admin dev user so the lead FK works
+    this.users.set('admin_dev_user', {
+      id: 'admin_dev_user',
+      email: 'admin@dev.local',
+      firstName: 'Admin',
+      lastName: 'User',
+      profileImageUrl: null,
+      passwordHash: null,
+      authProvider: 'local',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    // ── Property 1: HOT deal — Absentee owner, high equity, vacant, off market ──
+    const p1Id = this.propertyIdCounter++;
+    const p1: PropertyWithDetails = {
+      id: p1Id,
+      createdAt: new Date(),
+      address: '1234 Test Drive Ave',
+      city: 'Phoenix',
+      state: 'AZ',
+      zipCode: '85015',
+      beds: 4,
+      baths: '2.0',
+      sqft: 1850,
+      yearBuilt: 1998,
+      propertyType: 'Single Family',
+      lotSize: '0.18 acres',
+      parking: '2-car garage',
+      hasPool: true,
+      hoaFees: '0.00',
+      listPrice: '355000.00',
+      listingStatus: 'Off Market',
+      daysOnMarket: 0,
+      pricePerSqft: '191.89',
+      lastSalePrice: '210000.00',
+      lastSaleDate: '2017-03-22',
+      ownerName: 'James R. Whitfield',
+      ownerOccupied: false,
+      investorType: 'Individual',
+      equity: '175000.00',
+      equityPercent: 49,
+      estimatedValue: '385000.00',
+      liens: '0.00',
+      isListed: false,
+      listingHistory: [
+        { date: '2017-03-22', event: 'Sold', price: 210000 },
+        { date: '2016-11-01', event: 'Listed', price: 225000 },
+      ],
+      comparables: [
+        {
+          id: 1, propertyId: p1Id,
+          address: '1280 W Osborn Rd, Phoenix, AZ 85015',
+          salePrice: '378000.00', beds: 4, baths: '2.0', sqft: 1900,
+          pricePerSqft: '198.95', saleDate: '2024-11-14',
+        },
+        {
+          id: 2, propertyId: p1Id,
+          address: '1315 W Bethany Home Rd, Phoenix, AZ 85015',
+          salePrice: '365000.00', beds: 3, baths: '2.0', sqft: 1780,
+          pricePerSqft: '205.06', saleDate: '2024-09-28',
+        },
+        {
+          id: 3, propertyId: p1Id,
+          address: '1401 W Glendale Ave, Phoenix, AZ 85021',
+          salePrice: '392000.00', beds: 4, baths: '2.5', sqft: 2010,
+          pricePerSqft: '195.02', saleDate: '2024-08-05',
+        },
+      ],
+      marketMetrics: {
+        id: 1, propertyId: p1Id,
+        avgDaysOnMarket: 18,
+        medianSalePrice: '375000.00',
+        avgPricePerSqft: '199.00',
+        priceAppreciation: '6.20',
+      },
+    };
+    this.properties.set(p1Id, p1);
+
+    // ── Property 2: MODERATE deal — LLC-owned, tenant occupied, on market ──
+    const p2Id = this.propertyIdCounter++;
+    const p2: PropertyWithDetails = {
+      id: p2Id,
+      createdAt: new Date(),
+      address: '5678 Test DealFlow Ln',
+      city: 'Phoenix',
+      state: 'AZ',
+      zipCode: '85016',
+      beds: 3,
+      baths: '2.0',
+      sqft: 1450,
+      yearBuilt: 2003,
+      propertyType: 'Single Family',
+      lotSize: '0.14 acres',
+      parking: '2-car garage',
+      hasPool: false,
+      hoaFees: '85.00',
+      listPrice: '329900.00',
+      listingStatus: 'Active',
+      daysOnMarket: 34,
+      pricePerSqft: '234.41',
+      lastSalePrice: '265000.00',
+      lastSaleDate: '2020-07-10',
+      ownerName: 'Sunbelt Homes LLC',
+      ownerOccupied: false,
+      investorType: 'LLC',
+      equity: '95000.00',
+      equityPercent: 28,
+      estimatedValue: '340000.00',
+      liens: '0.00',
+      isListed: true,
+      listingHistory: [
+        { date: '2024-12-01', event: 'Listed', price: 349900 },
+        { date: '2025-01-15', event: 'Price Drop', price: 329900 },
+        { date: '2020-07-10', event: 'Sold', price: 265000 },
+      ],
+      comparables: [
+        {
+          id: 4, propertyId: p2Id,
+          address: '5720 E Thomas Rd, Phoenix, AZ 85016',
+          salePrice: '335000.00', beds: 3, baths: '2.0', sqft: 1480,
+          pricePerSqft: '226.35', saleDate: '2024-10-22',
+        },
+        {
+          id: 5, propertyId: p2Id,
+          address: '5601 E Camelback Rd, Phoenix, AZ 85018',
+          salePrice: '348000.00', beds: 3, baths: '2.5', sqft: 1520,
+          pricePerSqft: '228.95', saleDate: '2024-12-03',
+        },
+      ],
+      marketMetrics: {
+        id: 2, propertyId: p2Id,
+        avgDaysOnMarket: 28,
+        medianSalePrice: '338000.00',
+        avgPricePerSqft: '227.00',
+        priceAppreciation: '4.80',
+      },
+    };
+    this.properties.set(p2Id, p2);
+
+    // ── Property 3: COOL deal — Owner occupied, low equity, pending ──
+    const p3Id = this.propertyIdCounter++;
+    const p3: PropertyWithDetails = {
+      id: p3Id,
+      createdAt: new Date(),
+      address: '9101 Test Triage Ter',
+      city: 'Phoenix',
+      state: 'AZ',
+      zipCode: '85017',
+      beds: 5,
+      baths: '3.0',
+      sqft: 2650,
+      yearBuilt: 2015,
+      propertyType: 'Single Family',
+      lotSize: '0.25 acres',
+      parking: '3-car garage',
+      hasPool: true,
+      hoaFees: '175.00',
+      listPrice: '515000.00',
+      listingStatus: 'Pending',
+      daysOnMarket: 8,
+      pricePerSqft: '196.23',
+      lastSalePrice: '480000.00',
+      lastSaleDate: '2022-04-18',
+      ownerName: 'Maria & Carlos Espinoza',
+      ownerOccupied: true,
+      investorType: 'Individual',
+      equity: '65000.00',
+      equityPercent: 13,
+      estimatedValue: '520000.00',
+      liens: '12500.00',
+      isListed: true,
+      listingHistory: [
+        { date: '2025-01-03', event: 'Listed', price: 530000 },
+        { date: '2025-01-10', event: 'Pending', price: 515000 },
+        { date: '2022-04-18', event: 'Sold', price: 480000 },
+      ],
+      comparables: [
+        {
+          id: 6, propertyId: p3Id,
+          address: '9200 N 7th Ave, Phoenix, AZ 85017',
+          salePrice: '510000.00', beds: 5, baths: '3.0', sqft: 2700,
+          pricePerSqft: '188.89', saleDate: '2024-11-30',
+        },
+        {
+          id: 7, propertyId: p3Id,
+          address: '9055 W Bethany Home Rd, Phoenix, AZ 85017',
+          salePrice: '525000.00', beds: 4, baths: '3.5', sqft: 2580,
+          pricePerSqft: '203.49', saleDate: '2024-10-15',
+        },
+        {
+          id: 8, propertyId: p3Id,
+          address: '8945 N 19th Ave, Phoenix, AZ 85021',
+          salePrice: '498000.00', beds: 5, baths: '2.5', sqft: 2620,
+          pricePerSqft: '190.08', saleDate: '2024-09-02',
+        },
+      ],
+      marketMetrics: {
+        id: 3, propertyId: p3Id,
+        avgDaysOnMarket: 22,
+        medianSalePrice: '512000.00',
+        avgPricePerSqft: '194.00',
+        priceAppreciation: '3.50',
+      },
+    };
+    this.properties.set(p3Id, p3);
+
+    // ── Seed one "claimed" lead for Property 1 (the Hot deal) ──
+    const leadId = this.leadIdCounter++;
+    this.leads.set(leadId, {
+      id: leadId,
+      userId: 'admin_dev_user',
+      propertyId: p1Id,
+      status: 'Hot',
+      notes: 'Absentee owner confirmed. Property vacant 6+ months. Driving-for-dollars found overgrown yard. High equity — great assignment candidate. Follow up with skip trace.',
+      claimedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+      updatedAt: new Date(),
+    });
+
+    console.log(`[MockSeed] ✓ Seeded ${this.properties.size} properties and ${this.leads.size} lead(s)`);
+  }
 
   async getUser(id: string): Promise<User | undefined> {
     return this.users.get(id);
@@ -559,8 +791,6 @@ export class MemStorage implements IStorage {
   }
 
   // Lead operations in memory
-  private leads: Map<number, Lead> = new Map();
-  private leadIdCounter = 1;
 
   async claimProperty(userId: string, propertyId: number): Promise<Lead> {
     const existing = Array.from(this.leads.values()).find(l => l.propertyId === propertyId && l.userId === userId);

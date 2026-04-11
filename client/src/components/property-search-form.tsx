@@ -41,6 +41,43 @@ interface AddressSuggestion {
   };
 }
 
+// Mock test addresses for local development — appear when user types "test"
+const MOCK_TEST_ADDRESSES: AddressSuggestion[] = [
+  {
+    formatted_address: "1234 Test Drive Ave, Phoenix, AZ 85015",
+    place_id: "mock-test-1",
+    components: {
+      street_number: "1234",
+      route: "Test Drive Ave",
+      locality: "Phoenix",
+      administrative_area_level_1: "AZ",
+      postal_code: "85015",
+    },
+  },
+  {
+    formatted_address: "5678 Test DealFlow Ln, Phoenix, AZ 85016",
+    place_id: "mock-test-2",
+    components: {
+      street_number: "5678",
+      route: "Test DealFlow Ln",
+      locality: "Phoenix",
+      administrative_area_level_1: "AZ",
+      postal_code: "85016",
+    },
+  },
+  {
+    formatted_address: "9101 Test Triage Ter, Phoenix, AZ 85017",
+    place_id: "mock-test-3",
+    components: {
+      street_number: "9101",
+      route: "Test Triage Ter",
+      locality: "Phoenix",
+      administrative_area_level_1: "AZ",
+      postal_code: "85017",
+    },
+  },
+];
+
 export default function PropertySearchForm({ onPropertySelect, onLoadingChange }: PropertySearchFormProps) {
   const { toast } = useToast();
   const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([]);
@@ -105,6 +142,20 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
       setAddressSuggestions([]);
       setShowSuggestions(false);
       return;
+    }
+
+    // Intercept: show mock test addresses when query contains "test"
+    const lowerQuery = query.toLowerCase();
+    if (lowerQuery.includes("test")) {
+      const mockMatches = MOCK_TEST_ADDRESSES.filter((a) =>
+        a.formatted_address.toLowerCase().includes(lowerQuery)
+      );
+      if (mockMatches.length > 0) {
+        setAddressSuggestions(mockMatches);
+        setShowSuggestions(true);
+        setIsSearching(false);
+        return;
+      }
     }
 
     setIsSearching(true);
@@ -264,15 +315,34 @@ export default function PropertySearchForm({ onPropertySelect, onLoadingChange }
   };
 
   // Handle address input changes
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const handleAddressChange = (value: string) => {
     form.setValue('address', value);
-    
-    // Debounce address search - reduced delay for faster response
-    const timeoutId = setTimeout(() => {
+
+    // Clear any pending Nominatim lookup
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
+    }
+
+    // Synchronous check: show mock test addresses instantly
+    const lowerValue = value.toLowerCase();
+    if (lowerValue.includes('test')) {
+      const mockMatches = MOCK_TEST_ADDRESSES.filter((a) =>
+        a.formatted_address.toLowerCase().includes(lowerValue)
+      );
+      if (mockMatches.length > 0) {
+        setAddressSuggestions(mockMatches);
+        setShowSuggestions(true);
+        setIsSearching(false);
+        return; // Skip Nominatim entirely
+      }
+    }
+
+    // Debounce Nominatim lookup for real addresses
+    debounceRef.current = setTimeout(() => {
       searchAddresses(value);
     }, 200);
-
-    return () => clearTimeout(timeoutId);
   };
 
   // Handle suggestion selection
